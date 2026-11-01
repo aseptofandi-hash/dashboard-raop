@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>2. Komparasi Gaji</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef2f7;padding:20px;color:#1e293b}
+.dashboard{max-width:1200px;margin:0 auto}
+.main-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:25px 30px;border-radius:14px;margin-bottom:25px;box-shadow:0 10px 25px rgba(0,0,0,.15)}
+.main-header h1{font-size:22px;font-weight:700}
+.main-header p{font-size:14px;opacity:.8;margin-top:5px}
+.data-section{background:#fff;border-radius:14px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:25px}
+.kpi-card{background:#f8fafc;border-radius:10px;padding:15px;border-left:5px solid #3b82f6;box-shadow:0 2px 5px rgba(0,0,0,0.05)}
+.kpi-card.green{border-left-color:#16a34a}.kpi-card.red{border-left-color:#dc2626}
+.kpi-card.purple{border-left-color:#7c3aed}.kpi-card.orange{border-left-color:#f59e0b}
+.kpi-card .label{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;font-weight:700;margin-bottom:5px}
+.kpi-card .value{font-size:20px;font-weight:800;color:#1e293b}
+.kpi-card .desc{font-size:12px;color:#64748b;margin-top:5px}
+.table-container{overflow-x:auto;margin-bottom:25px;border-radius:8px;border:1px solid #e2e8f0}
+table{width:100%;border-collapse:collapse;text-align:center;font-size:13px}
+thead th{padding:12px 8px;font-weight:700;font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid rgba(255,255,255,.15)}
+thead th:last-child{border-right:none}
+.h-b,.h-tot{background:#dc2626}.h-ssi{background:#2563eb}.h-jst{background:#7c3aed}.h-glo{background:#16a34a}.h-mag{background:#0000ff}.h-tk{background:#b45309}.h-dika{background:#dc2626}
+tbody td{padding:10px 8px;border-bottom:1px solid #e2e8f0;color:#334155;text-align:center}
+tbody tr:nth-child(even){background:#f8fafc}
+.total-cell{font-weight:800;background:#f1f5f9}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:15px}
+.chart-card h3{font-size:13px;font-weight:700;margin-bottom:15px;color:#475569;text-align:center}
+.canvas-container{position:relative;height:280px}
+
+/* STYLE HIGHLIGHT KHUSUS NO. 2 */
+.highlight-box{background:#f8fafc;border-left:5px solid #dc2626;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
+.highlight-box h4{font-size:15px;font-weight:800;margin-bottom:12px;color:#1e293b}
+.highlight-content{font-size:13.5px;line-height:1.8;color:#1e293b}
+.highlight-content .p-1{margin-bottom:15px;}
+.highlight-content .p-2{margin-bottom:15px; margin-top:5px; font-weight:600;}
+.highlight-content .desc-list{margin-top:5px; font-size:12.5px; line-height:1.6;}
+.highlight-content .desc-list div{margin-bottom:3px; display:flex;}
+.highlight-content .desc-list .num{width:180px; display:inline-block; font-weight:600;}
+.highlight-content .desc-list .val{flex:1;}
+.highlight-content b { color: #0f172a; }
+</style>
+</head>
+<body>
+<div class="dashboard">
+    <div class="main-header">
+        <h1>2. Komparasi Gaji</h1>
+        <p>Update Data: <b>01 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+    </div>
+    <div class="data-section">
+        <div id="dataContent"></div>
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+function fNum(num) { return num.toLocaleString('id-ID'); }
+
+// Data Gaji Historis (Update Nov: SSI 5180, JST 22804, Total 30248, Diff -1074)
+var details = [
+    {m:'Jan', s:4486, j:21906, g:1886, b:176, d:158, t:6, tot:28618}, {m:'Feb', s:4365, j:23487, g:1879, b:163, d:127, t:6, tot:30028},
+    {m:'Mar', s:5041, j:23926, g:1970, b:167, d:140, t:6, tot:31252}, {m:'Apr', s:5078, j:22661, g:1970, b:175, d:146, t:6, tot:30036},
+    {m:'Mei', s:4996, j:22649, g:1970, b:172, d:134, t:6, tot:29928}, {m:'Jun', s:5007, j:22610, g:1973, b:158, d:124, t:6, tot:29878},
+    {m:'Jul', s:5045, j:22674, g:1973, b:171, d:111, t:6, tot:29980}, {m:'Agu', s:5067, j:23031, g:1973, b:172, d:114, t:6, tot:30363},
+    {m:'Sept', s:5111, j:23305, g:1973, b:171, d:114, t:6, tot:30681}, {m:'Okt', s:5196, j:23861, g:1973, b:171, d:114, t:6, tot:31322},
+    {m:'Nov', s:5180, j:22804, g:1973, b:171, d:114, t:6, tot:30248}
+];
+
+var tbl = '';
+details.forEach(function(r) {
+    var hl = (r.m === 'Nov') ? 'style="background:#fffbeb;font-weight:bold;"' : '';
+    tbl += `<tr ${hl}><td>${r.m}</td><td>${fNum(r.s)}</td><td>${fNum(r.j)}</td><td>${fNum(r.g)}</td><td>${fNum(r.b)}</td><td>${fNum(r.d)}</td><td>${fNum(r.t)}</td><td class="total-cell">${fNum(r.tot)}</td></tr>`;
+});
+
+var content = `
+    <div class="kpi-grid">
+        <div class="kpi-card green"><div class="label">Total Gaji Nov</div><div class="value">Rp 30.248 Jt</div><div class="desc">-Rp 1.074 Jt (-3,55%)</div></div>
+        <div class="kpi-card purple"><div class="label">Gaji JST (Dominan)</div><div class="value">Rp 22.804 Jt</div><div class="desc">75,4% dari Total</div></div>
+        <div class="kpi-card orange"><div class="label">Gaji SSI</div><div class="value">Rp 5.180 Jt</div><div class="desc">17,1% dari Total</div></div>
+        <div class="kpi-card red"><div class="label">Gaji Tertinggi</div><div class="value">Oktober</div><div class="desc">Rp 31.322 Jt</div></div>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead><tr><th class="h-b">Bulan</th><th class="h-ssi">SSI</th><th class="h-jst">JST</th><th class="h-glo">GLO</th><th class="h-mag">MAG-BCA</th><th class="h-dika">MAG-DIKA</th><th class="h-tk">T. KBN</th><th class="h-tot">Total Gaji (Rp Jt)</th></tr></thead>
+            <tbody>${tbl}</tbody>
+        </table>
+    </div>
+    <div class="chart-grid">
+        <div class="chart-card"><h3>📈 Tren Total Gaji (Rp Juta)</h3><div class="canvas-container"><canvas id="chartTrendGaji"></canvas></div></div>
+        <div class="chart-card"><h3>🍩 Komposisi Gaji Nov 2026</h3><div class="canvas-container"><canvas id="chartDonatGaji"></canvas></div></div>
+    </div>
+    
+    <div class="highlight-box">
+        <h4>💡 Highlight :</h4>
+        <div class="highlight-content">
+            <div class="p-1">
+                <b>2.</b> Komparasi Gaji sementara pada Q-4 <b><i>November 2026</i></b> mengalami Penurunan sebesar <b>-/+ Rp. 1,07 Milyar</b> atau menjadi <b>Rp. 30.248 Milyar</b>, Turun <b>3,55 %</b> dibandingkan dengan posisi bulan Oktober 2026.
+            </div>
+            <div class="p-2">
+                Faktor yang mempengaruhi penurunan gaji diantaranya :
+            </div>
+            <div class="desc-list">
+                <div><span class="num">2.1 Pegawai Out (Jeda)</span> <span class="val">: 1/142 Orang (SSI/JST)</span></div>
+                <div><span class="num">2.2 Pegawai Out (Resign/TP)</span> <span class="val">: 1/18 Orang (SSI/JST)</span></div>
+                <div><span class="num">2.3 Pegawai Out (Pendi)</span> <span class="val">: 1/0 Orang (SSI/JST)</span></div>
+            </div>
+        </div>
+    </div>
+`;
+document.getElementById('dataContent').innerHTML = content;
+
+setTimeout(() => {
+    var labelsBulan = details.map(d=>d.m);
+    new Chart(document.getElementById('chartTrendGaji'), { type: 'line', data: { labels: labelsBulan, datasets: [{ label: 'Total Gaji', data: details.map(d=>d.tot), borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.1)', borderWidth: 3, tension: 0.4, fill: true, pointRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
+    
+    // Donat Gaji Nov: SSI 5180, JST 22804, GLO 1973, BCA 171, DIKA 114, TKN 6
+    new Chart(document.getElementById('chartDonatGaji'), { type: 'doughnut', data: { labels: ['SSI', 'JST', 'GLO', 'BCA', 'DIKA', 'TKN'], datasets: [{ data: [5180, 22804, 1973, 171, 114, 6], backgroundColor: ['#2563eb', '#7c3aed', '#16a34a', '#0000ff', '#dc2626', '#b45309'], borderWidth: 4, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } });
+}, 100);
+</script>
+</body>
+</html>

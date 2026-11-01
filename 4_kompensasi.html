@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>4. Kompensasi Akhir Masa Kontrak</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef2f7;padding:20px;color:#1e293b}
+.dashboard{max-width:1200px;margin:0 auto}
+.main-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:25px 30px;border-radius:14px;margin-bottom:25px;box-shadow:0 10px 25px rgba(0,0,0,.15)}
+.main-header h1{font-size:22px;font-weight:700}
+.main-header p{font-size:14px;opacity:.8;margin-top:5px}
+.data-section{background:#fff;border-radius:14px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.table-container{overflow-x:auto;margin-bottom:25px;border-radius:8px;border:1px solid #e2e8f0}
+table{width:100%;border-collapse:collapse;text-align:center;font-size:13px}
+thead th{padding:12px 8px;font-weight:700;font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid rgba(255,255,255,.15)}
+thead th:last-child{border-right:none}
+
+/* Warna Header Tabel disesuaikan dengan Screenshot */
+.h-no{background:#dc2626}
+.h-prog{background:#dc2626}
+.h-bln{background:#dc2626}
+.h-unit{background:#0000ff}
+.h-jml{background:#2563eb}
+.h-tot{background:#b45309}
+.h-ket{background:#b45309}
+.h-tgl{background:#d97706}
+.h-sts{background:#94a3b8}
+
+tbody td{padding:10px 8px;border-bottom:1px solid #e2e8f0;color:#334155;text-align:center; vertical-align:middle;}
+tbody tr:nth-child(even){background:#f8fafc}
+.total-cell{font-weight:800;background:#f1f5f9}
+.status-prog{color:#2563eb;font-weight:bold; font-style:italic;}
+
+/* Style untuk Baris Total Bawah */
+.row-total { background: #f8fafc; font-weight: 800; border-top: 2px solid #cbd5e1;}
+.row-total td { padding: 12px 8px; }
+
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:15px}
+.chart-card h3{font-size:13px;font-weight:700;margin-bottom:15px;color:#475569;text-align:center}
+.canvas-container{position:relative;height:280px}
+
+/* STYLE HIGHLIGHT */
+.highlight-box{background:#f0f9ff;border-left:5px solid #0284c7;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
+.highlight-box h4{font-size:15px;font-weight:800;margin-bottom:15px;color:#1e293b}
+.highlight-content{font-size:13.5px;line-height:1.7;color:#1e293b}
+
+/* CSS Grid untuk Highlight yang presisi */
+.desc-list{display:grid; grid-template-columns: 170px 10px 1fr; gap: 8px 0; margin-bottom: 15px;}
+.desc-list .num{font-weight:700; text-align:left;}
+.desc-list .colon{text-align:center; font-weight:700;}
+.desc-list .val{text-align:left; text-align:justify;}
+
+.highlight-content b { color: #0f172a; }
+.p-catatan{margin-top:15px; padding-top:15px; border-top:1px dashed #cbd5e1; font-size:12.5px;}
+.p-catatan ul{list-style:none; padding-left:0; margin-top:5px;}
+.p-catatan li{padding-left:15px; position:relative; margin-bottom:6px; font-style:italic; line-height:1.6;}
+.p-catatan li::before{content:'-'; position:absolute; left:0;}
+</style>
+</head>
+<body>
+<div class="dashboard">
+    <div class="main-header">
+        <h1>4. Kompensasi Akhir Masa Kontrak</h1>
+        <p>Update Data: <b>01 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+    </div>
+    <div class="data-section">
+        <div id="dataContent"></div>
+    </div>
+</div>
+
+<script>
+function fNum(num) { return num.toLocaleString('id-ID'); }
+
+// Data Kompensasi November (On-Progress)
+var kompData = [
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'SSI', org: 41, rp: 326057511, ket: 'Kompensasi Akhir Masa Kontrak Oktober-2026 (MK-1 Th)', tgl: '20/11/2026', status: 'On-Progress' },
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'JST', org: 143, rp: 526802378, ket: 'Kompensasi Akhir Masa Kontrak Oktober (Jeda) - PB (1x Upah)', tgl: '13/11/2026', status: 'On-Progress' },
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'JST', org: 9, rp: 52018189, ket: 'Kompensasi Akhir Masa Kontrak Oktober-2026 (MK-1 Th)', tgl: '20/11/2026', status: 'On-Progress' }
+];
+
+// Kalkulasi Total
+var totOrg = 41 + 143 + 9;
+var totRp = 326057511 + 526802378 + 52018189;
+
+var tblKomp = '';
+kompData.forEach(function(r, index) {
+    tblKomp += `<tr>`;
+    
+    // Rowspan untuk No, Program, Bulan (hanya di baris pertama)
+    if (index === 0) {
+        tblKomp += `
+            <td rowspan="${kompData.length}" style="font-weight:bold; font-size:14px;">${r.no}</td>
+            <td rowspan="${kompData.length}" style="font-weight:bold;">${r.prog}</td>
+            <td rowspan="${kompData.length}" style="font-weight:bold; background:#fef3c7;">${r.bln}</td>
+        `;
+    }
+    
+    // Kolom Unit dengan warna
+    var unitColor = r.unit === 'SSI' ? '#dc2626' : '#7c3aed';
+    tblKomp += `
+        <td style="background:${unitColor}; color:white; font-weight:bold;">${r.unit}</td>
+        <td>${fNum(r.org)}</td>
+        <td class="total-cell">${fNum(r.rp)}</td>
+        <td style="text-align:left; font-size:12px;">${r.ket}</td>
+        <td>${r.tgl}</td>
+        <td class="status-prog">${r.status}</td>
+    </tr>`;
+});
+
+// Tambahan Baris Total Keseluruhan
+tblKomp += `
+    <tr class="row-total">
+        <td colspan="4" style="text-align:right; padding-right:15px;">TOTAL KESELURUHAN</td>
+        <td style="color:#dc2626;">${fNum(totOrg)}</td>
+        <td style="color:#16a34a; text-align:center;">${fNum(totRp)}</td>
+        <td colspan="3" style="text-align:left; font-size:11px; color:#64748b; font-style:italic;">*Seluruh tagihan diproses sesuai tanggal pembayaran</td>
+    </tr>
+`;
+
+var content = `
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="h-no">NO</th>
+                    <th class="h-prog">PROGRAM</th>
+                    <th class="h-bln">BULAN</th>
+                    <th class="h-unit">UNIT</th>
+                    <th class="h-jml">JML (ORANG)</th>
+                    <th class="h-tot">TOTAL KOMPENSASI</th>
+                    <th class="h-ket" style="width:30%;">KETERANGAN</th>
+                    <th class="h-tgl">TGL PEMBAYARAN</th>
+                    <th class="h-sts">STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${tblKomp}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Catatan Penting -->
+    <div class="p-catatan" style="margin-top:0; margin-bottom:25px; border-top:none;">
+        <b>Catatan penting :</b>
+        <ul>
+            <li>Terhitung mulai bulan Oktober kompensasi akhir masa kontrak diberikan kepada pegawai sekurang-kurangnya telah memiliki masa kontrak 1 tahun.</li>
+            <li>Pegawai yang belum memiliki masa kerja 1 tahun maka PKWT-nya dilakukan perpanjangan, namun bilamana pegawai tersebut tidak diperpanjang/resign maka kompensasi diberikan saat akhir masa kontrak jatuh tempo.</li>
+        </ul>
+    </div>
+
+    <div class="chart-grid">
+        <div class="chart-card"><h3>🍩 Porsi Anggaran Kompensasi</h3><div class="canvas-container"><canvas id="chartKompensasi"></canvas></div></div>
+        <div class="chart-card"><h3>👥 Jumlah Pegawai Terdampak</h3><div class="canvas-container"><canvas id="chartKompensasiBar"></canvas></div></div>
+    </div>
+    
+    <div class="highlight-box">
+        <h4>📌 Highlight :</h4>
+        <div class="highlight-content">
+            <div class="desc-list">
+                <div class="num">4.1 Status November</div>
+                <div class="colon">:</div>
+                <div class="val">Terdapat <b>3 batch pembayaran</b> kompensasi yang saat ini berstatus <b>On-Progress</b> dengan total nilai <b>Rp 904,8 Juta</b> untuk <b>193 pegawai</b> (41 SSI & 152 JST).</div>
+                
+                <div class="num">4.2 Target Penyelesaian</div>
+                <div class="colon">:</div>
+                <div class="val">Sebagian besar pembayaran ditargetkan selesai pada tanggal <b>20 November 2026</b> (SSI MK-1 dan JST MK-1). Sementara untuk JST (Jeda) target selesai lebih awal pada <b>13 November 2026</b>.</div>
+            </div>
+        </div>
+    </div>
+`;
+document.getElementById('dataContent').innerHTML = content;
+
+setTimeout(() => {
+    // Donat: SSI vs JST
+    var totSsi = 326057511;
+    var totJst = 526802378 + 52018189;
+    new Chart(document.getElementById('chartKompensasi'), { 
+        type: 'doughnut', 
+        data: { 
+            labels: ['SSI', 'JST'], 
+            datasets: [{ data: [totSsi, totJst], backgroundColor: ['#dc2626', '#7c3aed'], borderWidth: 4, borderColor: '#fff' }] 
+        }, 
+        options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } 
+    });
+
+    // Bar: Jumlah Orang per Unit
+    new Chart(document.getElementById('chartKompensasiBar'), { 
+        type: 'bar', 
+        data: { 
+            labels: ['SSI', 'JST'], 
+            datasets: [
+                { label: 'Jumlah Orang', data: [41, 143+9], backgroundColor: ['#dc2626', '#7c3aed'], borderRadius: 4 }
+            ] 
+        }, 
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } 
+    });
+}, 100);
+</script>
+</body>
+</html>
