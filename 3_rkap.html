@@ -31,19 +31,19 @@ tbody tr:nth-child(even){background:#f8fafc}
 .chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:15px}
 .chart-card h3{font-size:13px;font-weight:700;margin-bottom:15px;color:#475569;text-align:center}
 .canvas-container{position:relative;height:280px}
-
-/* STYLE HIGHLIGHT KHUSUS NO. 3 */
-.highlight-box{background:#f0fdf4;border-left:5px solid #16a34a;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
+.highlight-box{background:#fef2f2;border-left:5px solid #dc2626;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
 .highlight-box h4{font-size:15px;font-weight:800;margin-bottom:12px;color:#1e293b}
 .highlight-content{font-size:13.5px;line-height:1.8;color:#1e293b; text-align:justify;}
 .highlight-content b { color: #0f172a; }
+.highlight-content .p-1{margin-bottom:15px;}
+.highlight-content .p-2{margin-top:15px; padding-top:10px; border-top:1px dashed #cbd5e1;}
 </style>
 </head>
 <body>
 <div class="dashboard">
     <div class="main-header">
         <h1>3. Komparasi Gaji Terhadap RKAP</h1>
-        <p>Update Data: <b>01 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+        <p>Update Data: <b>06 November 2026</b> | PT. Swadharma Sarana Informatika</p>
     </div>
     <div class="data-section">
         <div id="dataContent"></div>
@@ -54,10 +54,9 @@ tbody tr:nth-child(even){background:#f8fafc}
 <script>
 function fNum(num) { return num.toLocaleString('id-ID'); }
 
-// Data RKAP Historis (Update Nov: Realisasi 30248, Defisit +175 / Surplus)
-var histGaji = [28618, 30028, 31252, 30036, 29928, 29878, 29980, 30363, 30681, 31322, 30248];
+var histGaji = [28618, 30028, 31252, 30036, 29928, 29878, 29980, 30363, 30681, 31322, 30923];
 var histAnggaran = [30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422];
-var histDiff = [1804, 394, -829, 386, 495, 545, 443, 59, -258, -899, 175];
+var histDiff = [1804, 394, -829, 386, 495, 545, 443, 59, -258, -899, -501];
 var labelsBulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sept', 'Okt', 'Nov'];
 
 var tblRkap = '';
@@ -75,9 +74,9 @@ for(var i=0; i<labelsBulan.length; i++) {
 
 var content = `
     <div class="kpi-grid">
-        <div class="kpi-card green"><div class="label">Realisasi Nov</div><div class="value">Rp 30.248 Jt</div></div>
+        <div class="kpi-card red"><div class="label">Realisasi Nov</div><div class="value">Rp 30.923 Jt</div></div>
         <div class="kpi-card blue"><div class="label">Anggaran (RKAP)</div><div class="value">Rp 30.422 Jt</div></div>
-        <div class="kpi-card green"><div class="label">Status Nov</div><div class="value">Surplus +175 Jt</div><div class="desc">Berhasil menekan biaya</div></div>
+        <div class="kpi-card green"><div class="label">Status Nov</div><div class="value">Surplus -/+ 501 Jt</div><div class="desc">Anggaran tertekan</div></div>
         <div class="kpi-card red"><div class="label">Defisit Terdalam</div><div class="value">Oktober</div><div class="desc">-Rp 899 Jt</div></div>
     </div>
     <div class="table-container">
@@ -92,9 +91,17 @@ var content = `
     </div>
     
     <div class="highlight-box">
-        <h4>✅ Highlight :</h4>
+        <h4>⚠️ Highlight :</h4>
         <div class="highlight-content">
-            <b>3.</b> Anggaran RKAP Tahun 2026 sebesar <b>Rp30,422 Miliar</b>. Secara keseluruhan, beban gaji pegawai SSI/JST/DIKA/GLO/BCA pada posisi November 2026 mengalami <b>Surplus Anggaran sebesar -/+ 175 Juta</b>. Dibandingkan posisi Oktober 2026.
+            <div class="p-1">
+                <b>3.</b> Anggaran RKAP Tahun 2026 sebesar <b>Rp30,422 Miliar</b>. Secara keseluruhan, beban gaji pegawai SSI/JST/DIKA/GLO/BCA pada posisi November 2026 mengalami <b>Surplus Anggaran sebesar -/+ 501 Juta</b>. Dibandingkan posisi Oktober 2026.
+            </div>
+            
+            <div class="p-2">
+                Berdasarkan data Komparasi Gaji dari <b>Januari s.d November 2026</b>, terjadi kenaikan total gaji sebesar <b>+Rp 2.305 Juta</b>. Jika dipersentasekan, pertumbuhan total gaji dari awal tahun hingga November adalah sebesar <b>+8,05%</b>.
+                <br><br>
+                <b>Catatan Tambahan :</b> - Terjadi kenaikan pada unit SSI sebesar <b>Rp 9 Juta</b> dan penurunan pada JST sebesar <b>Rp 407 Juta</b>, sehingga secara total bulanan terjadi pengurangan beban gaji sebesar <b>-Rp 399 Juta</b> dibandingkan posisi akhir bulan lalu. Penurunan biaya ini berhasil menekan angka defisit dari -Rp 899 Juta di bulan Oktober menjadi surplus anggaran sebesar <b>-/+ Rp 501 Juta</b> di bulan November 2026.
+            </div>
         </div>
     </div>
 `;
