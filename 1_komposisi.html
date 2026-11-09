@@ -31,6 +31,8 @@ tbody tr:nth-child(even){background:#f8fafc}
 .chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:15px}
 .chart-card h3{font-size:13px;font-weight:700;margin-bottom:15px;color:#475569;text-align:center}
 .canvas-container{position:relative;height:280px}
+
+/* STYLE HIGHLIGHT KHUSUS NO. 1 */
 .highlight-box{background:#f0f9ff;border-left:5px solid #0284c7;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
 .highlight-box h4{font-size:15px;font-weight:800;margin-bottom:12px;color:#1e293b}
 .highlight-content{font-size:13.5px;line-height:1.8;color:#1e293b}
@@ -40,7 +42,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 .highlight-content .desc-list{margin-top:5px; font-size:12.5px;}
 .highlight-content .desc-list div{margin-bottom:3px;}
 .mini-table{float:right; width:320px; margin-left:15px; margin-bottom:10px; border-collapse:collapse; font-size:12px;}
-.mini-table th, .mini-table td{border:1px solid #cbd5e1; padding:6px 10px; text-align:center;}
+.mini-table th, .mini-table td{border:1px solid #cbd5e1; padding:6px 10px; text-align:center; color:#1e293b;} /* Default text color black */
 .mini-table th{background:#f1f5f9; font-weight:700;}
 .mini-table .bg-red{background:#dc2626; color:#fff; border-color:#dc2626;}
 .mini-table .bg-blue{background:#2563eb; color:#fff; border-color:#2563eb;}
@@ -109,23 +111,25 @@ var content = `
     <div class="highlight-box">
         <h4>📌 Highlight :</h4>
         <div class="highlight-content">
+            <!-- TABEL INDIKATOR (WARNA KUNING DIHAPUS, TEKS HITAM) -->
             <table class="mini-table">
                 <tr><th>Indikator</th><th class="bg-red">SSI</th><th class="bg-blue">JST</th><th class="bg-green">Total</th></tr>
-                <tr><td>Pegawai masuk</td><td>5</td><td>152</td><td>157</td></tr>
-                <tr><td>Pegawai keluar</td><td>3</td><td>196</td><td>199</td></tr>
-                <tr class="row-red"><td>Selisih masuk-keluar</td><td>2</td><td>-44</td><td>-42</td></tr>
+                <tr><td>Pegawai Masuk</td><td>5</td><td>154</td><td>159</td></tr>
+                <tr><td>Pegawai Keluar</td><td>6</td><td>195</td><td>201</td></tr>
+                <tr class="row-red"><td>Selisih (-/+)</td><td>-1</td><td>-41</td><td>-42</td></tr>
             </table>
             <div class="p-1">
                 Komposisi pegawai SSI dan Alih Daya Q-4 s.d <b>06 November 2026</b> mengalami penurunan sebanyak <b>-42 orang</b> menjadi <b>5.517 orang</b> dibandingkan bulan Oktober 2026 (turun sekitar 0,76%).
                 <div class="desc-list" style="margin-top:10px;">
+                    <!-- TEKS RINCIAN DIPERBARUI -->
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai SSI (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 3 Orang</b>, (1) Org Undur diri; (1) Orang Jeda; (1) Pensiun Dini.
+                        <i>- Pegawai SSI (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 6 Orang</b>, terdiri dari (2) Undur Diri, (1) Pensiun Dini, (1) Jeda dan (2) Alih status Outsources.
                     </div>
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai JST (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 196 Orang</b>, terdiri dari : (142) Org Jeda; (35) Org Undur diri; (19) Org Tidak Diperpanjang;
+                        <i>- Pegawai JST (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 195 Orang</b>, terdiri dari : (142) Org Jeda; (34) Org Undur diri; (19) Org Tidak Diperpanjang;
                     </div>
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai JST (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 152 Orang</b>, terdiri dari (141) Org New Jeda; (11) Org New teridiri (6 Baru) - (3 Project BSI) – (2 Pengganti)
+                        <i>- Pegawai JST (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 154 Orang</b>, terdiri dari (141) Org New Jeda; (11) Org New teridiri (6 Baru) - (3 Project BSI) – (2 Pengganti) dan (2) Org Alih status....
                     </div>
                     <div>
                         <i>- Pegawai SSI (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 5 Orang</b> New Jeda;
