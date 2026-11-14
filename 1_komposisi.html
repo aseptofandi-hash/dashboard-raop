@@ -42,7 +42,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 .highlight-content .desc-list{margin-top:5px; font-size:12.5px;}
 .highlight-content .desc-list div{margin-bottom:3px;}
 .mini-table{float:right; width:320px; margin-left:15px; margin-bottom:10px; border-collapse:collapse; font-size:12px;}
-.mini-table th, .mini-table td{border:1px solid #cbd5e1; padding:6px 10px; text-align:center; color:#1e293b;} /* Default text color black */
+.mini-table th, .mini-table td{border:1px solid #cbd5e1; padding:6px 10px; text-align:center; color:#1e293b;}
 .mini-table th{background:#f1f5f9; font-weight:700;}
 .mini-table .bg-red{background:#dc2626; color:#fff; border-color:#dc2626;}
 .mini-table .bg-blue{background:#2563eb; color:#fff; border-color:#2563eb;}
@@ -55,7 +55,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 <div class="dashboard">
     <div class="main-header">
         <h1>1. Komposisi Pegawai</h1>
-        <p>Update Data: <b>06 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+        <p>Update Data: <b>13 November 2026</b> | PT. Swadharma Sarana Informatika</p>
     </div>
     <div class="data-section">
         <div id="dataContent"></div>
@@ -77,7 +77,7 @@ var komposisiData = [
 {q:'III', b:'Agustus', ssi:523, jst:4509, glo:332, dika:41, total:5405, diff:51},
 {q:'III', b:'September', ssi:528, jst:4574, glo:332, dika:41, total:5475, diff:70},
 {q:'IV', b:'Oktober', ssi:535, jst:4651, glo:332, dika:41, total:5559, diff:84},
-{q:'IV', b:'November', ssi:534, jst:4610, glo:332, dika:41, total:5517, diff:-42}
+{q:'IV', b:'November', ssi:534, jst:4629, glo:332, dika:41, total:5536, diff:-23}
 ];
 
 var tbl = '';
@@ -92,9 +92,9 @@ komposisiData.forEach(function(r, i) {
 
 var content = `
     <div class="kpi-grid">
-        <div class="kpi-card red"><div class="label">Total Pegawai Nov</div><div class="value">5.517 Orang</div><div class="desc">-42 org dari Okt</div></div>
+        <div class="kpi-card red"><div class="label">Total Pegawai Nov</div><div class="value">5.536 Orang</div><div class="desc">-23 org dari Okt</div></div>
         <div class="kpi-card red"><div class="label">Organik & PKWT (SSI)</div><div class="value">534 Orang</div><div class="desc">-1 org dari Okt</div></div>
-        <div class="kpi-card purple"><div class="label">Alih Daya (JST)</div><div class="value">4.610 Orang</div><div class="desc">-41 org dari Okt</div></div>
+        <div class="kpi-card purple"><div class="label">Alih Daya (JST)</div><div class="value">4.629 Orang</div><div class="desc">-22 org dari Okt</div></div>
         <div class="kpi-card orange"><div class="label">Magang (DIKA)</div><div class="value">41 Orang</div><div class="desc">Stabil</div></div>
     </div>
     <div class="table-container">
@@ -111,25 +111,23 @@ var content = `
     <div class="highlight-box">
         <h4>📌 Highlight :</h4>
         <div class="highlight-content">
-            <!-- TABEL INDIKATOR (WARNA KUNING DIHAPUS, TEKS HITAM) -->
             <table class="mini-table">
                 <tr><th>Indikator</th><th class="bg-red">SSI</th><th class="bg-blue">JST</th><th class="bg-green">Total</th></tr>
-                <tr><td>Pegawai Masuk</td><td>5</td><td>154</td><td>159</td></tr>
-                <tr><td>Pegawai Keluar</td><td>6</td><td>195</td><td>201</td></tr>
-                <tr class="row-red"><td>Selisih (-/+)</td><td>-1</td><td>-41</td><td>-42</td></tr>
+                <tr><td>Pegawai masuk</td><td>5</td><td>172</td><td>177</td></tr>
+                <tr><td>Pegawai keluar</td><td>6</td><td>194</td><td>200</td></tr>
+                <tr class="row-red"><td>Selisih (-/+)</td><td>-1</td><td>-22</td><td>-23</td></tr>
             </table>
             <div class="p-1">
-                Komposisi pegawai SSI dan Alih Daya Q-4 s.d <b>06 November 2026</b> mengalami penurunan sebanyak <b>-42 orang</b> menjadi <b>5.517 orang</b> dibandingkan bulan Oktober 2026 (turun sekitar 0,76%).
+                Komposisi pegawai SSI dan Alih Daya Q-4 s.d <b>13 November 2026</b> mengalami penurunan sebanyak <b>-23 orang</b> menjadi <b>5.536 orang</b> dibandingkan bulan Oktober 2026 (turun sekitar 0,42%).
                 <div class="desc-list" style="margin-top:10px;">
-                    <!-- TEKS RINCIAN DIPERBARUI -->
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai SSI (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 6 Orang</b>, terdiri dari (2) Undur Diri, (1) Pensiun Dini, (1) Jeda dan (2) Alih status Outsources.
+                        <i>- Pegawai SSI (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 6 Orang</b>, (2) Org Undur diri; (1) Orang Jeda; (1) Pensiun; (2) Alihdaya.
                     </div>
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai JST (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 195 Orang</b>, terdiri dari : (142) Org Jeda; (34) Org Undur diri; (19) Org Tidak Diperpanjang;
+                        <i>- Pegawai JST (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 194 Orang</b>, terdiri dari : (142) Org Jeda; (34) Org Undur diri; (17) Org Tidak Diperpanjang; (1) Org MD.
                     </div>
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai JST (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 154 Orang</b>, terdiri dari (141) Org New Jeda; (11) Org New teridiri (6 Baru) - (3 Project BSI) – (2 Pengganti) dan (2) Org Alih status....
+                        <i>- Pegawai JST (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 172 Orang</b>, terdiri dari: (141) Org New Jeda; (31) Org New Terdiri Dari Pegawai baru 15 Org; Pegawai Pengganti 9 Org; Project BSI 3 Org dan 2 Org Project KDMP dan 2 pegawai alih status outsource.
                     </div>
                     <div>
                         <i>- Pegawai SSI (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 5 Orang</b> New Jeda;
@@ -139,10 +137,11 @@ var content = `
             <div class="clear"></div>
             
             <div class="p-2">
-                Berdasarkan data Komposisi Pegawai dari <b>Januari s.d November 2026</b>, terjadi penambahan total sebesar <b>+334 orang</b>. Jika dipersentasekan, pertumbuhan total pegawai dari awal tahun hingga November adalah sebesar <b>+6,44%</b>.
+                Berdasarkan data Komposisi Pegawai dari <b>Januari s.d November 2026</b>, terjadi penambahan total sebesar <b>+353 orang</b>. Jika dipersentasekan, pertumbuhan total pegawai dari awal tahun hingga November adalah sebesar <b>+6,81%</b>.
             </div>
             <div class="p-3">
-                Catatan Tambahan : - Terjadi penurunan pada unit SSI (-1) dan JST (-41), sehingga secara total bulanan terjadi pengurangan sebesar -42 orang dibandingkan posisi akhir bulan lalu.
+                <!-- KOREKSI CATATAN TAMBAHAN -->
+                Catatan Tambahan : - Terjadi penurunan pada unit SSI sebanyak -1 orang dan JST sebanyak -22 orang, sehingga secara total bulanan terjadi pengurangan sebesar -23 orang dibandingkan posisi akhir bulan lalu.
             </div>
         </div>
     </div>
@@ -153,7 +152,7 @@ setTimeout(() => {
     var labelsBulan = komposisiData.map(d=>d.b);
     new Chart(document.getElementById('chartTrendPeg'), { type: 'line', data: { labels: labelsBulan, datasets: [{ label: 'Total Pegawai', data: komposisiData.map(d=>d.total), borderColor: '#1e3a8a', backgroundColor: 'rgba(30,58,138,0.1)', borderWidth: 3, tension: 0.4, fill: true, pointRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
     
-    new Chart(document.getElementById('chartDonatPeg'), { type: 'doughnut', data: { labels: ['SSI', 'JST', 'GLO', 'DIKA'], datasets: [{ data: [534, 4610, 332, 41], backgroundColor: ['#2563eb', '#7c3aed', '#16a34a', '#d97706'], borderWidth: 4, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } });
+    new Chart(document.getElementById('chartDonatPeg'), { type: 'doughnut', data: { labels: ['SSI', 'JST', 'GLO', 'DIKA'], datasets: [{ data: [534, 4629, 332, 41], backgroundColor: ['#2563eb', '#7c3aed', '#16a34a', '#d97706'], borderWidth: 4, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } });
 }, 100);
 </script>
 </body>

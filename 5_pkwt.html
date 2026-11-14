@@ -26,6 +26,8 @@ tbody tr:last-child{font-weight:bold; background:#f1f5f9; border-top:2px solid #
 .chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:15px}
 .chart-card h3{font-size:13px;font-weight:700;margin-bottom:15px;color:#475569;text-align:center}
 .canvas-container{position:relative;height:280px}
+
+/* STYLE HIGHLIGHT KHUSUS NO. 5 */
 .highlight-box{background:#fffbeb;border-left:5px solid #f59e0b;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
 .highlight-box h4{font-size:15px;font-weight:800;margin-bottom:15px;color:#1e293b}
 .highlight-content{font-size:13.5px;line-height:1.7;color:#1e293b;}
@@ -38,7 +40,7 @@ tbody tr:last-child{font-weight:bold; background:#f1f5f9; border-top:2px solid #
 <div class="dashboard">
     <div class="main-header">
         <h1>5. Progress Penyelesaian PKWT Karyawan SSI dan Alih Daya (JST)</h1>
-        <p>Update per <b>06 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+        <p>Update per <b>13 November 2026</b> | PT. Swadharma Sarana Informatika</p>
     </div>
     <div class="data-section">
         <div id="dataContent"></div>
@@ -46,18 +48,19 @@ tbody tr:last-child{font-weight:bold; background:#f1f5f9; border-top:2px solid #
 </div>
 
 <script>
+// Data Update 13 November 2026
 var pkwtData = [
-    { reg:'PUSAT', total:34, done:20, prog:14, pDone:'58,82%', pProg:'41,18%' },
-    { reg:'REG-1', total:127, done:0, prog:127, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-2', total:150, done:0, prog:150, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-3', total:321, done:33, prog:288, pDone:'10,28%', pProg:'89,72%' },
-    { reg:'REG-4', total:144, done:18, prog:126, pDone:'12,50%', pProg:'87,50%' },
-    { reg:'REG-5', total:110, done:0, prog:110, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-6', total:126, done:0, prog:126, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-7', total:177, done:0, prog:177, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-8', total:62, done:0, prog:62, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-9', total:82, done:0, prog:82, pDone:'0,00%', pProg:'100,00%' },
-    { reg:'REG-10', total:80, done:0, prog:80, pDone:'0,00%', pProg:'100,00%' }
+    { reg:'PUSAT', total:34, done:9, prog:25, pDone:'26,47%', pProg:'73,53%' },
+    { reg:'REG-1', total:126, done:33, prog:93, pDone:'26,19%', pProg:'73,81%' },
+    { reg:'REG-2', total:149, done:90, prog:59, pDone:'60,40%', pProg:'39,60%' },
+    { reg:'REG-3', total:351, done:251, prog:100, pDone:'71,51%', pProg:'28,49%' },
+    { reg:'REG-4', total:141, done:16, prog:125, pDone:'11,35%', pProg:'88,65%' },
+    { reg:'REG-5', total:110, done:61, prog:49, pDone:'55,45%', pProg:'44,55%' },
+    { reg:'REG-6', total:126, done:85, prog:41, pDone:'67,46%', pProg:'32,54%' },
+    { reg:'REG-7', total:177, done:51, prog:126, pDone:'28,81%', pProg:'71,19%' },
+    { reg:'REG-8', total:62, done:23, prog:39, pDone:'37,10%', pProg:'62,90%' },
+    { reg:'REG-9', total:82, done:43, prog:39, pDone:'52,44%', pProg:'47,56%' },
+    { reg:'REG-10', total:79, done:31, prog:48, pDone:'39,24%', pProg:'60,76%' }
 ];
 
 var tblPkwt = '';
@@ -65,7 +68,7 @@ pkwtData.forEach(function(r) {
     tblPkwt += `<tr>
         <td style="font-weight:bold;">${r.reg}</td>
         <td>${r.total}</td>
-        <td class="status-done">${r.done === 0 ? '-' : r.done}</td>
+        <td class="status-done">${r.done}</td>
         <td class="status-done">${r.pDone}</td>
         <td class="status-prog">${r.prog}</td>
         <td class="status-prog">${r.pProg}</td>
@@ -93,11 +96,11 @@ var content = `
                 ${tblPkwt}
                 <tr>
                     <td>TOTAL</td>
-                    <td>1.413</td>
-                    <td class="status-done">71</td>
-                    <td class="status-done">5,02%</td>
-                    <td class="status-prog">1.342</td>
-                    <td class="status-prog">94,98%</td>
+                    <td>1.437</td>
+                    <td class="status-done">693</td>
+                    <td class="status-done">48,23%</td>
+                    <td class="status-prog">744</td>
+                    <td class="status-prog">51,77%</td>
                 </tr>
             </tbody>
         </table>
@@ -110,12 +113,12 @@ var content = `
     <div class="highlight-box">
         <h4>📌 Highlight :</h4>
         <div class="highlight-content">
-            <p><b>1. Capaian Keseluruhan:</b> Dari total <b>1.413 karyawan</b> yang masuk proses PKWT bulan ini, sebanyak <b>71 karyawan (5,02%)</b> telah berstatus <b>DONE</b> (Selesai). Sisa <b>1.342 karyawan (94,98%)</b> masih berstatus <b>ON-PROGRESS</b>.</p>
-            <p><b>2. Region Terbaik:</b> <b>PUSAT</b> dan <b>REG-4</b> memimpin dengan progress penyelesaian tertinggi masing-masing sebesar <b>58,82%</b> (20 dari 34 karyawan) dan <b>12,50%</b> (18 dari 144 karyawan).</p>
-            <p><b>3. Sisa Pekerjaan Rumah:</b> Hampir seluruh Region (kecuali PUSAT, REG-3, dan REG-4) masih berada di angka <b>0% Done</b> dan perlu perhatian khusus.</p>
+            <p><b>1. Capaian Keseluruhan:</b> Dari total <b>1.437 karyawan</b> yang masuk proses PKWT bulan ini, sebanyak <b>693 karyawan (48,23%)</b> telah berstatus <b>DONE</b> (Selesai). Sisa <b>744 karyawan (51,77%)</b> masih berstatus <b>ON-PROGRESS</b>.</p>
+            <p><b>2. Region Terbaik:</b> <b>REG-3</b> memimpin dengan progress penyelesaian tertinggi mencapai <b>71,51%</b> (251 dari 351 karyawan). Disusul oleh <b>REG-6 (67,46%)</b> dan <b>REG-2 (60,40%)</b>.</p>
+            <p><b>3. Region Perhatian Khusus:</b> <b>REG-4</b> menjadi region dengan progress terendah, baru mencapai <b>11,35% Done</b> (hanya 16 dari 141 karyawan). Diikuti oleh <b>REG-1 (26,19%)</b> dan <b>PUSAT (26,47%)</b>.</p>
             
             <div class="target-box">
-                <b>🎯 Target Penyelesaian:</b> Diharapkan seluruh proses PKWT ini dapat <b>diselesaikan paling lambat pada tanggal 20 November 2026</b> (H-5 sebelum realisasi gaji). Hal ini krusial untuk memastikan kelancaran administrasi dan kelancaran pembayaran gaji tepat waktu.
+                <b>🎯 Target Penyelesaian:</b> Mengingat batas waktu penyelesaian adalah <b>tanggal 20 November 2026</b> (H-5 sebelum realisasi gaji), sisa 7 hari harus dimaksimalkan untuk mengejar penyelesaian 744 karyawan, dengan fokus eskalasi khusus pada REG-4.
             </div>
         </div>
     </div>
@@ -123,8 +126,25 @@ var content = `
 document.getElementById('dataContent').innerHTML = content;
 
 setTimeout(() => {
-    new Chart(document.getElementById('chartPkwt'), { type: 'doughnut', data: { labels: ['Done (71)', 'On-Progress (1.342)'], datasets: [{ data: [71, 1342], backgroundColor: ['#16a34a', '#dc2626'], borderWidth: 4, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } });
-    new Chart(document.getElementById('chartPkwtBar'), { type: 'bar', data: { labels: pkwtData.map(d=>d.reg), datasets: [{ label: 'Done', data: pkwtData.map(d=>d.done), backgroundColor: '#16a34a', borderRadius: 4 }, { label: 'On-Progress', data: pkwtData.map(d=>d.prog), backgroundColor: '#dc2626', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true }, y: { stacked: true } } } });
+    // Donat: 693 Done (Hijau), 744 On-Progress (Merah)
+    new Chart(document.getElementById('chartPkwt'), { 
+        type: 'doughnut', 
+        data: { labels: ['Done (693)', 'On-Progress (744)'], datasets: [{ data: [693, 744], backgroundColor: ['#16a34a', '#dc2626'], borderWidth: 4, borderColor: '#fff' }] }, 
+        options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } 
+    });
+
+    // Grafik Batang: Menampilkan batang Hijau (Done) dan Merah (On-Progress) per Region
+    new Chart(document.getElementById('chartPkwtBar'), { 
+        type: 'bar', 
+        data: { 
+            labels: pkwtData.map(d=>d.reg), 
+            datasets: [
+                { label: 'Done', data: pkwtData.map(d=>d.done), backgroundColor: '#16a34a', borderRadius: 4 }, 
+                { label: 'On-Progress', data: pkwtData.map(d=>d.prog), backgroundColor: '#dc2626', borderRadius: 4 }
+            ] 
+        }, 
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true }, y: { stacked: true } } } 
+    });
 }, 100);
 </script>
 </body>

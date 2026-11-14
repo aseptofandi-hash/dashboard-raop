@@ -45,7 +45,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 <div class="dashboard">
     <div class="main-header">
         <h1>3. Komparasi Gaji Terhadap RKAP</h1>
-        <p>Update Data: <b>06 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+        <p>Update Data: <b>13 November 2026</b> | PT. Swadharma Sarana Informatika</p>
     </div>
     <div class="data-section">
         <div id="dataContent"></div>
@@ -56,10 +56,10 @@ tbody tr:nth-child(even){background:#f8fafc}
 <script>
 function fNum(num) { return num.toLocaleString('id-ID'); }
 
-// Data RKAP Historis
-var histGaji = [28618, 30028, 31252, 30036, 29928, 29878, 29980, 30363, 30681, 31322, 30923];
+// Data RKAP Historis (Update Nov: Realisasi 31029, Defisit -607)
+var histGaji = [28618, 30028, 31252, 30036, 29928, 29878, 29980, 30363, 30681, 31322, 31029];
 var histAnggaran = [30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422, 30422];
-var histDiff = [1804, 394, -829, 386, 495, 545, 443, 59, -258, -899, -501];
+var histDiff = [1804, 394, -829, 386, 495, 545, 443, 59, -258, -899, -607];
 var labelsBulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sept', 'Okt', 'Nov'];
 
 var tblRkap = '';
@@ -77,10 +77,9 @@ for(var i=0; i<labelsBulan.length; i++) {
 
 var content = `
     <div class="kpi-grid">
-        <div class="kpi-card red"><div class="label">Realisasi Nov</div><div class="value">Rp 30.923 Jt</div></div>
+        <div class="kpi-card red"><div class="label">Realisasi Nov</div><div class="value">Rp 31.029 Jt</div></div>
         <div class="kpi-card blue"><div class="label">Anggaran (RKAP)</div><div class="value">Rp 30.422 Jt</div></div>
-        <!-- KOREKSI: DEFISIT BUKAN SURPLUS -->
-        <div class="kpi-card red"><div class="label">Status Nov</div><div class="value">Defisit -501 Jt</div><div class="desc">Melebihi RKAP</div></div>
+        <div class="kpi-card red"><div class="label">Status Nov</div><div class="value">Defisit -Rp 607 Jt</div><div class="desc">Anggaran tertekan</div></div>
         <div class="kpi-card red"><div class="label">Defisit Terdalam</div><div class="value">Oktober</div><div class="desc">-Rp 899 Jt</div></div>
     </div>
     <div class="table-container">
@@ -98,13 +97,13 @@ var content = `
         <h4>⚠️ Highlight :</h4>
         <div class="highlight-content">
             <div class="p-1">
-                <b>3.</b> Anggaran RKAP Tahun 2026 sebesar <b>Rp 30,422 Miliar</b>. Secara keseluruhan, beban gaji pegawai SSI/JST/DIKA/GLO/BCA pada posisi November 2026 mengalami <b>Defisit Anggaran sebesar -/+ 501 Juta</b> dibandingkan posisi Oktober 2026.
+                <b>3.</b> Anggaran RKAP Tahun 2026 sebesar <b>Rp 30,422 Miliar</b>. Secara keseluruhan, beban gaji pegawai SSI/JST/DIKA/GLO/BCA pada posisi November 2026 mengalami <b>Defisit Anggaran sebesar -/+ Rp. 607 Juta</b> dibandingkan posisi Oktober 2026.
             </div>
             
             <div class="p-2">
-                Berdasarkan data Komparasi Gaji dari <b>Januari s.d November 2026</b>, terjadi kenaikan total gaji sebesar <b>+Rp 2.305 Juta</b>. Jika dipersentasekan, pertumbuhan total gaji dari awal tahun hingga November adalah sebesar <b>+8,05%</b>.
+                Berdasarkan data Komparasi Gaji dari <b>Januari s.d November 2026</b>, terjadi kenaikan total gaji sebesar <b>+Rp 2.411 Juta</b>. Jika dipersentasekan, pertumbuhan total gaji dari awal tahun hingga November adalah sebesar <b>+8,42%</b>.
                 <br><br>
-                <b>Catatan Tambahan :</b> - Terjadi kenaikan pada unit SSI sebesar <b>Rp 9 Juta</b> dan penurunan pada JST sebesar <b>Rp 407 Juta</b>, sehingga secara total bulanan terjadi pengurangan beban gaji sebesar <b>-Rp 399 Juta</b> dibandingkan posisi akhir bulan lalu. Meskipun masih berstatus defisit, penurunan biaya ini berhasil menekan angka defisit agar tidak semakin melebar (dari -Rp 899 Juta di bulan Oktober menjadi <b>-Rp 501 Juta</b> di bulan November 2026).
+                <b>Catatan Tambahan :</b> - Terjadi kenaikan pada unit SSI sebesar <b>Rp 8 Juta</b> dan penurunan pada JST sebesar <b>Rp 301 Juta</b>, sehingga secara total bulanan terjadi pengurangan beban gaji sebesar <b>-Rp 293 Juta</b> dibandingkan posisi akhir bulan lalu. Meskipun masih berstatus defisit, penurunan biaya ini berhasil menekan angka defisit agar tidak semakin melebar (dari -Rp 899 Juta di bulan Oktober menjadi <b>-Rp 607 Juta</b> di bulan November 2026).
             </div>
         </div>
     </div>

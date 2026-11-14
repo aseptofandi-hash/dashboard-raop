@@ -9,10 +9,12 @@
     body { background-color: #eef2f7; padding: 20px; color: #1e293b; }
     .dashboard { max-width: 1300px; margin: 0 auto; }
     
+    /* HEADER */
     .main-header { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: #fff; padding: 25px 30px; border-radius: 14px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,.15); }
     .main-header h1 { font-size: 22px; font-weight: 700; }
     .main-header p { font-size: 14px; opacity: .8; margin-top: 5px; }
 
+    /* KPI CARDS */
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
     .kpi-card { border-radius: 8px; padding: 15px 20px; color: #fff; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .kpi-card .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; margin-bottom: 5px; }
@@ -23,11 +25,13 @@
     .bg-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
     .bg-green { background: linear-gradient(135deg, #22c55e, #16a34a); }
 
+    /* CARD & SECTION */
     .section-title { font-size: 18px; font-weight: 700; margin: 25px 0 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; color: #1e293b;}
     .chart-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,.05);}
     .chart-card h3 { font-size: 14px; font-weight: 700; color: #475569; margin-bottom: 15px; }
-    .canvas-container { position: relative; height: 380px; width: 100%; }
+    .canvas-container { position: relative; height: 400px; width: 100%; }
     
+    /* TABEL INDIKATOR */
     .table-container { background: #fff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.05); overflow-x: auto; margin-bottom: 25px;}
     table { width: 100%; border-collapse: collapse; text-align: center; font-size: 13px; }
     th { background: #f8fafc; color: #475569; padding: 12px 8px; border: 1px solid #cbd5e1; font-weight: 700; }
@@ -45,6 +49,7 @@
     .row-karyawan .h-karyawan-label { background: #dc2626; color: white; }
     .row-growth-highlight { background: #dc2626 !important; color: white !important; font-weight: 800;}
 
+    /* HIGHLIGHT BOX */
     .highlight-box{background:#f8fafc;border-left:5px solid #3b82f6;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
     .highlight-box h4{font-size:15px;font-weight:800;margin-bottom:12px;color:#1e293b}
     .highlight-box ul{list-style:none;padding-left:0;font-size:13.5px;line-height:1.7}
@@ -52,16 +57,6 @@
     .highlight-box li::before{content:'▪';position:absolute;left:0;color:#3b82f6;font-weight:bold}
     .highlight-box.success{border-left-color:#16a34a;background:#f0fdf4}
     .highlight-box.success li::before{color:#16a34a}
-    .highlight-box.warning{border-left-color:#f59e0b;background:#fffbeb}
-    .highlight-box.warning li::before{color:#f59e0b}
-
-    .table-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,.05);}
-    .table-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 15px; background: #e0e7ff; padding: 10px; border-radius: 6px; text-align: center; text-transform: uppercase;}
-    .tbl-rasio th { background: #f8fafc; color: #475569; padding: 10px 6px; border-bottom: 2px solid #e2e8f0; font-weight: 700; border: 1px solid #cbd5e1; font-size:11px;}
-    .tbl-rasio td { padding: 8px 6px; border-bottom: 1px solid #f1f5f9; color: #334155; border: 1px solid #cbd5e1; font-size:11px;}
-    .bg-orange-light { background: #ffedd5; }
-    .bg-green-light { background: #dcfce7; }
-    .text-blue { color: #2563eb; font-weight: 700; }
 
     @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
@@ -157,6 +152,7 @@
         </table>
     </div>
 
+    <!-- HIGHLIGHT FINANSIAL & PRODUKTIVITAS -->
     <div class="highlight-box success">
         <h4>💡 Highlight & Analisa Finansial & Produktivitas (Jan vs Okt 2026)</h4>
         <ul>
@@ -166,83 +162,13 @@
         </ul>
     </div>
 
-    <!-- GRAFIK TREN KEUANGAN & SDM (HARDCODED) -->
+    <!-- GRAFIK TREN KEUANGAN & SDM -->
     <div class="section-title">Tren Kinerja Keuangan & Operasional (Jan - Okt 2026)</div>
     <div class="chart-card">
         <h3>Tren Keuangan (EBIT, EBITDA, EAT) vs Pertumbuhan SDM - Jan s.d Okt 2026</h3>
         <div class="canvas-container">
             <canvas id="chartGabungan"></canvas>
         </div>
-    </div>
-
-    <!-- TABEL RASIO ATM -->
-    <div class="section-title">Rasio Jumlah Pegawai Terhadap Jumlah Kelolaan ATM (Data Agustus 2026)</div>
-    <div class="table-card">
-        <div class="table-title">A. PERIODE AGUSTUS 2026 (DATA RASIO TERAKHIR)</div>
-        <table class="tbl-rasio">
-            <thead>
-                <tr>
-                    <th rowspan="2">No.</th>
-                    <th rowspan="2" style="width:120px;">Position</th>
-                    <th colspan="2">Agustus 2026</th>
-                    <th rowspan="2">Satuan</th>
-                    <th rowspan="2">Rasio</th>
-                </tr>
-                <tr>
-                    <th>Jumlah Pegawai</th>
-                    <th>Jumlah Kelolaan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>1</td><td style="text-align:left; font-weight:bold;">CR-FLM</td><td class="bg-orange-light">3.975</td><td class="bg-green-light text-blue">19.937</td><td>Unit</td><td class="text-blue">1 : 4,7</td></tr>
-                <tr><td>2</td><td style="text-align:left; font-weight:bold;">CIT</td><td class="bg-orange-light">313</td><td class="bg-green-light">43.976</td><td>Trip</td><td class="text-blue">1 : 136,1</td></tr>
-                <tr><td>3</td><td style="text-align:left; font-weight:bold;">SLM</td><td class="bg-orange-light">269</td><td class="bg-green-light">5.130</td><td>Unit</td><td class="text-blue">1 : 18,8</td></tr>
-                <tr><td>4</td><td style="text-align:left;">Head Quarter</td><td class="bg-orange-light">273</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr><td>5</td><td style="text-align:left;">Security (GLO)</td><td class="bg-orange-light">332</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr><td>6</td><td style="text-align:left;">Magang (Dika)</td><td class="bg-orange-light">41</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr><td>7</td><td style="text-align:left;">Jeda</td><td class="bg-orange-light">202</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr style="background:#f1f5f9; font-weight:800;"><td colspan="2">Jumlah</td><td class="bg-orange-light">5.405</td><td class="bg-green-light">69.043</td><td></td><td></td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="table-card">
-        <div class="table-title">B. PERBANDINGAN HISTORIS (DES 2024 - AGU 2026)</div>
-        <table class="tbl-rasio">
-            <thead>
-                <tr>
-                    <th rowspan="2">No.</th>
-                    <th rowspan="2" style="width:100px;">Position</th>
-                    <th colspan="3">Jumlah Pegawai</th>
-                    <th colspan="3">Jumlah Kelolaan</th>
-                    <th rowspan="2">Satuan</th>
-                    <th colspan="3">Rasio</th>
-                </tr>
-                <tr>
-                    <th>Dec-24</th><th>Dec-25</th><th class="bg-orange-light">Agu-26</th>
-                    <th>Dec-24</th><th>Dec-25</th><th class="bg-green-light">Agu-26</th>
-                    <th>Dec-24</th><th>Dec-25</th><th class="bg-green-light">Agu-26</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>1</td><td style="text-align:left; font-weight:bold;">CR-FLM</td><td>4.265</td><td>3.954</td><td class="bg-orange-light text-blue">3.975</td><td>19.841</td><td>19.704</td><td class="bg-green-light text-blue">19.937</td><td>Unit</td><td>1:4,6</td><td>1:4,9</td><td class="bg-green-light text-blue">1:4,7</td></tr>
-                <tr><td>2</td><td style="text-align:left; font-weight:bold;">CIT</td><td>357</td><td>322</td><td class="bg-orange-light">313</td><td>37.034</td><td>41.312</td><td class="bg-green-light">43.976</td><td>Trip</td><td>1:103,7</td><td>1:128,3</td><td class="bg-green-light text-blue">1:136,1</td></tr>
-                <tr><td>3</td><td style="text-align:left; font-weight:bold;">SLM</td><td>352</td><td>322</td><td class="bg-orange-light">269</td><td>7.331</td><td>5.891</td><td class="bg-green-light">5.130</td><td>Unit</td><td>1:20,8</td><td>1:18,3</td><td class="bg-green-light text-blue">1:18,8</td></tr>
-                <tr><td>4</td><td style="text-align:left;">Head Quarter</td><td>313</td><td>260</td><td class="bg-orange-light">273</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr><td>5</td><td style="text-align:left;">Security (GLO)</td><td>356</td><td>335</td><td class="bg-orange-light">332</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr><td>6</td><td style="text-align:left;">Magang (Dika)</td><td>-</td><td>52</td><td class="bg-orange-light">41</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr><td>7</td><td style="text-align:left;">Jeda</td><td>-</td><td>195</td><td class="bg-orange-light">202</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-                <tr style="background:#f1f5f9; font-weight:800;"><td colspan="2">Jumlah</td><td>5.643</td><td>5.440</td><td class="bg-orange-light">5.405</td><td>64.206</td><td>66.907</td><td class="bg-green-light">69.043</td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="highlight-box warning">
-        <h4>⚠️ Highlight & Analisa Rasio ATM (Data Agustus 2026)</h4>
-        <ul>
-            <li><b>Efisiensi Rasio ATM:</b> Terjadi tren positif di mana jumlah pegawai turun (dari 5.643 di Des-24 menjadi 5.405 di Agu-26), namun jumlah kelolaan ATM naik (dari 64.206 menjadi 69.043 unit).</li>
-            <li><b>Peningkatan Beban Kerja Terkelola:</b> Hal ini tercermin dari rasio <b>CR-FLM</b> yang membaik dari 1:4,6 menjadi <b>1:4,7</b>, dan rasio <b>CIT</b> yang melonjak tajam dari 1:103,7 menjadi <b>1:136,1 Trip per pegawai</b>.</li>
-        </ul>
     </div>
 
 </div>
