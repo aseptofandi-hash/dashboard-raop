@@ -17,7 +17,7 @@ table{width:100%;border-collapse:collapse;text-align:center;font-size:13px}
 thead th{padding:12px 8px;font-weight:700;font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid rgba(255,255,255,.15)}
 thead th:last-child{border-right:none}
 
-/* Warna Header Tabel disesuaikan */
+/* Warna Header Tabel */
 .h-no{background:#dc2626}
 .h-prog{background:#dc2626}
 .h-bln{background:#dc2626}
@@ -32,7 +32,6 @@ tbody td{padding:10px 8px;border-bottom:1px solid #e2e8f0;color:#334155;text-ali
 tbody tr:nth-child(even){background:#f8fafc}
 .total-cell{font-weight:800;background:#f1f5f9}
 .status-done{color:#16a34a;font-weight:bold; font-style:italic;}
-.status-prog{color:#2563eb;font-weight:bold; font-style:italic;}
 
 /* Style untuk Baris Total Bawah */
 .row-total { background: #f8fafc; font-weight: 800; border-top: 2px solid #cbd5e1;}
@@ -44,7 +43,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 .canvas-container{position:relative;height:280px}
 
 /* STYLE HIGHLIGHT */
-.highlight-box{background:#f0f9ff;border-left:5px solid #0284c7;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
+.highlight-box{background:#f0fdf4;border-left:5px solid #16a34a;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
 .highlight-box h4{font-size:15px;font-weight:800;margin-bottom:15px;color:#1e293b}
 .highlight-content{font-size:13.5px;line-height:1.7;color:#1e293b}
 
@@ -65,7 +64,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 <div class="dashboard">
     <div class="main-header">
         <h1>4. Kompensasi Akhir Masa Kontrak</h1>
-        <p>Update Data: <b>13 November 2026</b> | PT. Swadharma Sarana Informatika</p>
+        <p>Update Data: <b>20 November 2026</b> | PT. Swadharma Sarana Informatika</p>
     </div>
     <div class="data-section">
         <div id="dataContent"></div>
@@ -75,12 +74,12 @@ tbody tr:nth-child(even){background:#f8fafc}
 <script>
 function fNum(num) { return num.toLocaleString('id-ID'); }
 
-// Data Kompensasi November (Update Status)
+// Data Kompensasi November (SEMUA DONE)
 var kompData = [
-    { no: 1, prog: 'Estimasi Kompensasi', bln: 'November', unit: 'SSI', org: 1, rp: 4932640, ket: 'MK > 5 Thn (Belum Realisasi)', tgl: '13/11/2026', status: 'Done' },
-    { no: 1, prog: 'Estimasi Kompensasi', bln: 'November', unit: 'SSI', org: 41, rp: 326057511, ket: 'Pegawai yang habis kontrak di bulan Oktober (PKWT - 1 Thn)', tgl: '20/11/2026', status: 'On-Progress' },
-    { no: 1, prog: 'Estimasi Kompensasi', bln: 'November', unit: 'JST', org: 142, rp: 523555732, ket: 'MK > 5 Thn (Belum Realisasi)', tgl: '13/11/2026', status: 'Done' },
-    { no: 1, prog: 'Estimasi Kompensasi', bln: 'November', unit: 'JST', org: 9, rp: 46919885, ket: 'Pegawai yang habis kontrak di bulan Oktober (PKWT - 1 Thn)', tgl: '20/11/2026', status: 'On-Progress' }
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'SSI', org: 1, rp: 4932640, ket: 'MK > 5 Thn (Belum Realisasi)', tgl: '13/11/2026', status: 'Done' },
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'SSI', org: 41, rp: 326057511, ket: 'Pegawai yang habis kontrak di bulan Oktober (PKWT - 1 Thn)', tgl: '20/11/2026', status: 'Done' },
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'JST', org: 142, rp: 523555732, ket: 'MK > 5 Thn (Belum Realisasi)', tgl: '13/11/2026', status: 'Done' },
+    { no: 1, prog: 'Kompensasi', bln: 'November', unit: 'JST', org: 9, rp: 46919885, ket: 'Pegawai yang habis kontrak di bulan Oktober (PKWT - 1 Thn)', tgl: '20/11/2026', status: 'Done' }
 ];
 
 // Kalkulasi Total
@@ -102,7 +101,6 @@ kompData.forEach(function(r, index) {
     
     // Kolom Unit dengan warna
     var unitColor = r.unit === 'SSI' ? '#dc2626' : '#7c3aed';
-    var statusClass = r.status === 'Done' ? 'status-done' : 'status-prog';
     
     tblKomp += `
         <td style="background:${unitColor}; color:white; font-weight:bold;">${r.unit}</td>
@@ -110,7 +108,7 @@ kompData.forEach(function(r, index) {
         <td class="total-cell">${fNum(r.rp)}</td>
         <td style="text-align:left; font-size:12px;">${r.ket}</td>
         <td>${r.tgl}</td>
-        <td class="${statusClass}">${r.status}</td>
+        <td class="status-done">${r.status}</td>
     </tr>`;
 });
 
@@ -120,7 +118,7 @@ tblKomp += `
         <td colspan="4" style="text-align:right; padding-right:15px;">TOTAL KESELURUHAN</td>
         <td style="color:#dc2626;">${fNum(totOrg)}</td>
         <td style="color:#16a34a; text-align:center;">${fNum(totRp)}</td>
-        <td colspan="3" style="text-align:left; font-size:11px; color:#64748b; font-style:italic;">*Seluruh tagihan diproses sesuai tanggal pembayaran</td>
+        <td colspan="3" style="text-align:left; font-size:11px; color:#64748b; font-style:italic;">*Seluruh tagihan telah selesai dibayarkan</td>
     </tr>
 `;
 
@@ -161,16 +159,16 @@ var content = `
     </div>
     
     <div class="highlight-box">
-        <h4>📌 Highlight :</h4>
+        <h4>✅ Highlight (Status: COMPLETED) :</h4>
         <div class="highlight-content">
             <div class="desc-list">
-                <div class="num">4.1 Realisasi (Done)</div>
+                <div class="num">4.1 Status Realisasi</div>
                 <div class="colon">:</div>
-                <div class="val">Sebanyak <b>143 pegawai</b> (1 SSI & 142 JST) dengan total nilai <b>Rp 528,48 Juta</b> telah <b>selesai (Done)</b> dibayarkan pada tanggal <b>13 November 2026</b>.</div>
+                <div class="val"><b>Luar biasa!</b> Seluruh kewajiban kompensasi akhir masa kontrak untuk periode November 2026 telah <b>100% selesai (Done)</b> dibayarkan.</div>
                 
-                <div class="num">4.2 Target On-Progress</div>
+                <div class="num">4.2 Rincian Pencapaian</div>
                 <div class="colon">:</div>
-                <div class="val">Sisa <b>50 pegawai</b> (41 SSI & 9 JST) dengan total nilai <b>Rp 372,97 Juta</b> masih berstatus <b>On-Progress</b> dan ditargetkan selesai pada tanggal <b>20 November 2026</b>.</div>
+                <div class="val">Total realisasi mencapai <b>Rp 901,4 Juta</b> untuk <b>193 pegawai</b> (42 SSI & 151 JST). Pembayaran telah dituntaskan pada tanggal 13/11 dan 20/11/2026.</div>
             </div>
         </div>
     </div>
@@ -178,30 +176,26 @@ var content = `
 document.getElementById('dataContent').innerHTML = content;
 
 setTimeout(() => {
-    // Donat: Done vs On-Progress
-    var doneRp = 4932640 + 523555732;
-    var progRp = 326057511 + 46919885;
-    
+    // Donat: 100% Done (Hijau)
     new Chart(document.getElementById('chartKompensasi'), { 
         type: 'doughnut', 
         data: { 
-            labels: ['Done (13/11)', 'On-Progress (20/11)'], 
-            datasets: [{ data: [doneRp, progRp], backgroundColor: ['#16a34a', '#2563eb'], borderWidth: 4, borderColor: '#fff' }] 
+            labels: ['Done (13/11 & 20/11)', 'On-Progress'], 
+            datasets: [{ data: [totRp, 0], backgroundColor: ['#16a34a', '#cbd5e1'], borderWidth: 4, borderColor: '#fff' }] 
         }, 
         options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' } } } 
     });
 
-    // Bar: Jumlah Orang per Unit
+    // Bar: Jumlah Orang per Unit (Semua Hijau)
     new Chart(document.getElementById('chartKompensasiBar'), { 
         type: 'bar', 
         data: { 
             labels: ['SSI', 'JST'], 
             datasets: [
-                { label: 'Done', data: [1, 142], backgroundColor: '#16a34a', borderRadius: 4 },
-                { label: 'On-Progress', data: [41, 9], backgroundColor: '#2563eb', borderRadius: 4 }
+                { label: 'Done', data: [1+41, 142+9], backgroundColor: '#16a34a', borderRadius: 4 }
             ] 
         }, 
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true }, y: { stacked: true } } } 
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } 
     });
 }, 100);
 </script>
