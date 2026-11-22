@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#eef2f7;padding:20px;color:#1e293b}
-.dashboard{max-width:1300px;margin:0 auto}
+.dashboard{max-width:1350px;margin:0 auto}
 .main-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:25px 30px;border-radius:14px;margin-bottom:25px;box-shadow:0 10px 25px rgba(0,0,0,.15)}
 .main-header h1{font-size:22px;font-weight:700}
 .main-header p{font-size:14px;opacity:.8;margin-top:5px}
@@ -16,7 +16,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#eef2f7;padding:20px;col
 /* TABLE STYLE */
 .table-container{overflow-x:auto;margin-bottom:25px;border-radius:8px;border:1px solid #e2e8f0}
 table{width:100%;border-collapse:collapse;text-align:center;font-size:12px}
-thead th{padding:10px 5px;font-weight:700;font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid rgba(255,255,255,.15)}
+thead th{padding:10px 8px;font-weight:700;font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid rgba(255,255,255,.15)}
 thead th:last-child{border-right:none}
 /* Warna Header */
 .h-q,.h-b,.h-tot{background:#dc2626}
@@ -28,9 +28,13 @@ thead th:last-child{border-right:none}
 .h-mag{background:#d97706}
 .h-diff{background:#facc15;color:#1e293b}
 
-tbody td{padding:8px 5px;border-bottom:1px solid #e2e8f0;color:#334155;text-align:center}
+tbody td{padding:10px 8px;border-bottom:1px solid #e2e8f0;color:#334155;text-align:center; white-space: nowrap;}
 tbody tr:nth-child(even){background:#f8fafc}
 .total-cell{font-weight:800;background:#f1f5f9}
+
+/* Baris Total Jan-Nov */
+.row-total-akumulatif { background: #e2e8f0 !important; font-weight: 800; border-top: 2px solid #94a3b8; }
+.row-total-akumulatif td { color: #0f172a; padding: 12px 8px;}
 
 /* HIGHLIGHT BOX */
 .highlight-box{background:#f0f9ff;border-left:5px solid #0284c7;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
@@ -42,7 +46,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 .highlight-content .desc-list{margin-top:5px; font-size:12.5px;}
 .highlight-content .desc-list div{margin-bottom:3px;}
 .mini-table{float:right; width:320px; margin-left:15px; margin-bottom:10px; border-collapse:collapse; font-size:12px;}
-.mini-table th, .mini-table td{border:1px solid #cbd5e1; padding:6px 10px; text-align:center; color:#1e293b;}
+.mini-table th, .mini-table td{border:1px solid #cbd5e1; padding:6px 10px; text-align:center; color:#1e293b; white-space:normal;}
 .mini-table th{background:#f1f5f9; font-weight:700;}
 .mini-table .bg-red{background:#dc2626; color:#fff; border-color:#dc2626;}
 .mini-table .bg-blue{background:#2563eb; color:#fff; border-color:#2563eb;}
@@ -71,7 +75,7 @@ tbody tr:nth-child(even){background:#f8fafc}
 <script>
 function fNum(num) { return num.toLocaleString('id-ID'); }
 
-// Data Komposisi Lengkap (Termasuk JST Lama, Pengganti, Baru Non/Proj)
+// Data Komposisi Lengkap
 var komposisiData = [
 {q:'I', b:'Jan', ssi:454, jstLama:4261, jstPeng:60, jstNon:15, jstProj:0, glo:333, dika:60, total:5183, diff:-62},
 {q:'I', b:'Feb', ssi:447, jstLama:4334, jstPeng:57, jstNon:0, jstProj:192, glo:332, dika:51, total:5413, diff:230},
@@ -101,6 +105,15 @@ var projectDetails = {
     'November': 'Project Kolaborasi CR-FLM BSI, CR FLM Bank NTB Syariah, Project KDMP.'
 };
 
+// Hitung Total Akumulatif Jan-Nov
+var totalPeng = 0, totalNon = 0, totalProj = 0;
+komposisiData.forEach(function(d) {
+    totalPeng += d.jstPeng;
+    totalNon += d.jstNon;
+    totalProj += d.jstProj;
+});
+var totalPegawaiBaru = totalNon + totalProj;
+
 var tbl = '';
 komposisiData.forEach(function(r, i) {
     var isNewQ = (i === 0 || komposisiData[i-1].q !== r.q);
@@ -116,6 +129,17 @@ komposisiData.forEach(function(r, i) {
     tbl += '<td style="color:'+(r.diff>=0?'#16a34a':'#dc2626')+'; font-weight:bold;">'+(r.diff>=0?'+':'')+fNum(r.diff)+'</td>';
     tbl += '</tr>';
 });
+
+// Tambahkan Baris Total Akumulatif di Bawah Tabel
+tbl += `
+    <tr class="row-total-akumulatif">
+        <td colspan="4">TOTAL AKUMULATIF (JAN - NOV)</td>
+        <td style="color:#b45309;">${fNum(totalPeng)}</td>
+        <td style="color:#2563eb;">${fNum(totalNon)}</td>
+        <td style="color:#7c3aed;">${fNum(totalProj)}</td>
+        <td colspan="4"></td>
+    </tr>
+`;
 
 var content = `
     <div class="table-container">
@@ -185,12 +209,13 @@ var content = `
             </div>
             <div class="clear"></div>
             
+            <!-- NARASI DIKOREKSI (PENGGANTI DIHAPUS DARI NARASI PERTUMBUHAN) -->
             <div class="p-2">
-                <b>Analisa Pegawai Baru (Non-Project vs Project):</b><br>
-                Secara akumulatif dari Januari s.d November 2026, dinamika penambahan pegawai baru sangat fluktuatif. Penambahan **Pegawai Project** melonjak sangat tinggi di bulan Februari (192 org) dan September (60 org). <i>(Arahkan kursor ke grafik untuk melihat detail projectnya)</i>.
+                <b>Analisa Akumulatif Pegawai Baru (Jan - Nov 2026):</b><br>
+                Selama kurun waktu Januari s.d November 2026, total penambahan **Pegawai Baru Non-Project** mencapai <b>${fNum(totalNon)} orang</b>, dan penambahan **Pegawai Baru Project** mencapai <b>${fNum(totalProj)} orang</b>. Sehingga total keseluruhan penambahan pegawai baru (Non-Project + Project) selama kurang lebih 11 bulan ini adalah sebanyak <b>${fNum(totalPegawaiBaru)} Orang</b>.
             </div>
             <div class="p-3">
-                Berdasarkan data Komposisi Pegawai dari <b>Januari s.d November 2026</b>, terjadi penambahan total sebesar <b>+372 orang</b>. Jika dipersentasekan, pertumbuhan total pegawai dari awal tahun hingga November adalah sebesar <b>+7,18%</b>.
+                Berdasarkan data Komposisi Pegawai dari <b>Januari s.d November 2026</b>, terjadi penambahan total pegawai (keseluruhan) sebesar <b>+372 orang</b> atau tumbuh <b>+7,18%</b>.
             </div>
         </div>
     </div>
@@ -247,7 +272,6 @@ setTimeout(() => {
                             return label;
                         },
                         afterLabel: function(context) {
-                            // Tampilkan detail project hanya jika yang di-hover adalah dataset 'Project'
                             if (context.dataset.label === 'Project') {
                                 let month = context.label;
                                 let details = projectDetails[month];
