@@ -77,17 +77,17 @@ function fNum(num) { return num.toLocaleString('id-ID'); }
 
 // Data Komposisi Lengkap
 var komposisiData = [
-{q:'I', b:'Jan', ssi:454, jstLama:4261, jstPeng:60, jstNon:15, jstProj:0, glo:333, dika:60, total:5183, diff:-62},
-{q:'I', b:'Feb', ssi:447, jstLama:4334, jstPeng:57, jstNon:0, jstProj:192, glo:332, dika:51, total:5413, diff:230},
-{q:'I', b:'Mar', ssi:519, jstLama:4621, jstPeng:23, jstNon:18, jstProj:25, glo:332, dika:53, total:5591, diff:178},
-{q:'II', b:'April', ssi:515, jstLama:4422, jstPeng:27, jstNon:16, jstProj:14, glo:332, dika:58, total:5384, diff:-207},
-{q:'II', b:'Mei', ssi:514, jstLama:4424, jstPeng:29, jstNon:17, jstProj:8, glo:332, dika:47, total:5371, diff:-13},
-{q:'II', b:'Juni', ssi:514, jstLama:4423, jstPeng:36, jstNon:1, jstProj:8, glo:332, dika:45, total:5359, diff:-12},
-{q:'III', b:'Juli', ssi:521, jstLama:4390, jstPeng:38, jstNon:3, jstProj:29, glo:332, dika:41, total:5354, diff:-5},
-{q:'III', b:'Agustus', ssi:523, jstLama:4435, jstPeng:54, jstNon:8, jstProj:12, glo:332, dika:41, total:5405, diff:51},
-{q:'III', b:'September', ssi:528, jstLama:4461, jstPeng:41, jstNon:12, jstProj:60, glo:332, dika:41, total:5475, diff:70},
-{q:'IV', b:'Oktober', ssi:535, jstLama:4588, jstPeng:33, jstNon:2, jstProj:28, glo:332, dika:41, total:5559, diff:84},
-{q:'IV', b:'November', ssi:535, jstLama:4595, jstPeng:17, jstNon:14, jstProj:21, glo:332, dika:41, total:5555, diff:-4}
+{q:'I', b:'Jan', ssi:454, jstLama:4261, jstPeng:75, jstProj:0, glo:333, dika:60, total:5183, diff:-62},
+{q:'I', b:'Feb', ssi:447, jstLama:4334, jstPeng:57, jstProj:192, glo:332, dika:51, total:5413, diff:230},
+{q:'I', b:'Mar', ssi:519, jstLama:4621, jstPeng:41, jstProj:25, glo:332, dika:53, total:5591, diff:178},
+{q:'II', b:'April', ssi:515, jstLama:4422, jstPeng:43, jstProj:14, glo:332, dika:58, total:5384, diff:-207},
+{q:'II', b:'Mei', ssi:514, jstLama:4424, jstPeng:46, jstProj:8, glo:332, dika:47, total:5371, diff:-13},
+{q:'II', b:'Juni', ssi:514, jstLama:4423, jstPeng:37, jstProj:8, glo:332, dika:45, total:5359, diff:-12},
+{q:'III', b:'Juli', ssi:521, jstLama:4390, jstPeng:41, jstProj:29, glo:332, dika:41, total:5354, diff:-5},
+{q:'III', b:'Agustus', ssi:523, jstLama:4435, jstPeng:62, jstProj:12, glo:332, dika:41, total:5405, diff:51},
+{q:'III', b:'September', ssi:528, jstLama:4461, jstPeng:53, jstProj:60, glo:332, dika:41, total:5475, diff:70},
+{q:'IV', b:'Oktober', ssi:535, jstLama:4588, jstPeng:35, jstProj:28, glo:332, dika:41, total:5559, diff:84},
+{q:'IV', b:'November', ssi:535, jstLama:4595, jstPeng:31, jstProj:21, glo:332, dika:41, total:5555, diff:-4}
 ];
 
 // Detail Project per Bulan (Untuk Tooltip Interaktif)
@@ -106,13 +106,12 @@ var projectDetails = {
 };
 
 // Hitung Total Akumulatif Jan-Nov
-var totalPeng = 0, totalNon = 0, totalProj = 0;
+var totalPeng = 0, totalProj = 0;
 komposisiData.forEach(function(d) {
     totalPeng += d.jstPeng;
-    totalNon += d.jstNon;
     totalProj += d.jstProj;
 });
-var totalPegawaiBaru = totalNon + totalProj;
+var totalPegawaiBaru = totalPeng + totalProj;
 
 var tbl = '';
 komposisiData.forEach(function(r, i) {
@@ -123,7 +122,7 @@ komposisiData.forEach(function(r, i) {
     if(isNewQ) tbl += '<td rowspan="'+rowSpan+'" style="font-weight:bold;background:#f1f5f9;">'+r.q+'</td>';
     tbl += '<td>'+r.b+'</td>';
     tbl += '<td>'+fNum(r.ssi)+'</td>';
-    tbl += '<td>'+fNum(r.jstLama)+'</td><td>'+fNum(r.jstPeng)+'</td><td>'+fNum(r.jstNon)+'</td><td>'+fNum(r.jstProj)+'</td>';
+    tbl += '<td>'+fNum(r.jstLama)+'</td><td>'+fNum(r.jstPeng)+'</td><td>'+fNum(r.jstProj)+'</td>';
     tbl += '<td>'+fNum(r.glo)+'</td><td>'+fNum(r.dika)+'</td>';
     tbl += '<td class="total-cell">'+fNum(r.total)+'</td>';
     tbl += '<td style="color:'+(r.diff>=0?'#16a34a':'#dc2626')+'; font-weight:bold;">'+(r.diff>=0?'+':'')+fNum(r.diff)+'</td>';
@@ -135,7 +134,6 @@ tbl += `
     <tr class="row-total-akumulatif">
         <td colspan="4">TOTAL AKUMULATIF (JAN - NOV)</td>
         <td style="color:#b45309;">${fNum(totalPeng)}</td>
-        <td style="color:#2563eb;">${fNum(totalNon)}</td>
         <td style="color:#7c3aed;">${fNum(totalProj)}</td>
         <td colspan="4"></td>
     </tr>
@@ -149,20 +147,19 @@ var content = `
                     <th class="h-q" rowspan="3">Quartal</th>
                     <th class="h-b" rowspan="3">Bulan</th>
                     <th class="h-ssi" rowspan="3">SSI</th>
-                    <th class="h-jst" colspan="4">JST</th>
-                    <th class="h-glo" rowspan="3">GLO</th>
-                    <th class="h-mag" rowspan="3">DIKA</th>
-                    <th class="h-tot" rowspan="3">Total</th>
+                    <th class="h-jst" colspan="4">Alih Daya</th>
+                    <th class="h-mag" rowspan="3">Magang<br>(DIKA)</th>
+                    <th class="h-tot" rowspan="3">Total<br>Pegawai</th>
                     <th class="h-diff" rowspan="3">+/-</th>
                 </tr>
                 <tr>
-                    <th class="h-jst-sub" rowspan="2">Lama</th>
-                    <th class="h-jst-sub" rowspan="2">Pengganti</th>
-                    <th class="h-jst-sub2" colspan="2">Baru</th>
+                    <th class="h-jst-sub" colspan="3">JST</th>
+                    <th class="h-glo" rowspan="2">GLO</th>
                 </tr>
                 <tr>
-                    <th class="h-jst-sub2">Non</th>
-                    <th class="h-jst-sub2">Project</th>
+                    <th class="h-jst-sub2">Lama</th>
+                    <th class="h-jst-sub2">Pengganti</th>
+                    <th class="h-jst-sub2">Baru<br>Project</th>
                 </tr>
             </thead>
             <tbody>${tbl}</tbody>
@@ -176,7 +173,7 @@ var content = `
             <div class="canvas-container"><canvas id="chartTrendPeg"></canvas></div>
         </div>
         <div class="chart-card">
-            <h3>📊 Kurva Pertumbuhan Pegawai Baru (Non-Project vs Project)</h3>
+            <h3>📊 Kurva Pegawai Masuk (Pengganti vs Project)</h3>
             <div class="canvas-container"><canvas id="chartNewEmp"></canvas></div>
         </div>
     </div>
@@ -200,7 +197,7 @@ var content = `
                         <i>- Pegawai JST (Out)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#dc2626;">- 196 Orang</b>, (142) Org Jeda; (35) Org Undur diri; (18) Org Tidak Diperpanjang; (1) Org MD.
                     </div>
                     <div style="margin-bottom: 8px;">
-                        <i>- Pegawai JST (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 193 Orang</b>, (141) Org New Jeda; (17) Org Pengganti; (14) Org New Non-Project; (21) Org New Project (Kolaborasi CR-FLM BSI, Bank NTB Syariah, KDMP).
+                        <i>- Pegawai JST (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 193 Orang</b>, (141) Org New Jeda; (31) Org Pengganti; (21) Org New Project (Kolaborasi CR-FLM BSI, Bank NTB Syariah, KDMP).
                     </div>
                     <div>
                         <i>- Pegawai SSI (IN)</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b style="color:#16a34a;">+ 5 Orang</b> New Jeda;
@@ -209,10 +206,10 @@ var content = `
             </div>
             <div class="clear"></div>
             
-            <!-- NARASI DIKOREKSI (PENGGANTI DIHAPUS DARI NARASI PERTUMBUHAN) -->
+            <!-- NARASI SUDAH DIKOREKSI (TANPA ISTILAH NON-PROJECT) -->
             <div class="p-2">
                 <b>Analisa Akumulatif Pegawai Baru (Jan - Nov 2026):</b><br>
-                Selama kurun waktu Januari s.d November 2026, total penambahan **Pegawai Baru Non-Project** mencapai <b>${fNum(totalNon)} orang</b>, dan penambahan **Pegawai Baru Project** mencapai <b>${fNum(totalProj)} orang</b>. Sehingga total keseluruhan penambahan pegawai baru (Non-Project + Project) selama kurang lebih 11 bulan ini adalah sebanyak <b>${fNum(totalPegawaiBaru)} Orang</b>.
+                Selama kurun waktu Januari s.d November 2026, total penambahan **Pegawai Pengganti** mencapai <b>${fNum(totalPeng)} orang</b>, dan penambahan **Pegawai Baru Project** mencapai <b>${fNum(totalProj)} orang</b>. Sehingga total keseluruhan penambahan pegawai baru selama kurang lebih 11 bulan ini adalah sebanyak <b>${fNum(totalPegawaiBaru)} Orang</b>.
             </div>
             <div class="p-3">
                 Berdasarkan data Komposisi Pegawai dari <b>Januari s.d November 2026</b>, terjadi penambahan total pegawai (keseluruhan) sebesar <b>+372 orang</b> atau tumbuh <b>+7,18%</b>.
@@ -232,15 +229,15 @@ setTimeout(() => {
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } 
     });
     
-    // 2. Chart Pegawai Baru (Non vs Project) dengan Tooltip Interaktif
+    // 2. Chart Pegawai Masuk (Pengganti vs Project)
     new Chart(document.getElementById('chartNewEmp'), {
         type: 'line',
         data: {
             labels: labelsBulan,
             datasets: [
                 {
-                    label: 'Non-Project',
-                    data: komposisiData.map(d=>d.jstNon),
+                    label: 'Pengganti',
+                    data: komposisiData.map(d=>d.jstPeng),
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.1)',
                     borderWidth: 3, tension: 0.4, fill: true, pointRadius: 5
