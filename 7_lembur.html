@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#eef2f7;padding:20px;color:#1e293b}
-.dashboard{max-width:1300px;margin:0 auto}
+.dashboard{max-width:1350px;margin:0 auto}
 .main-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:25px 30px;border-radius:14px;margin-bottom:25px;box-shadow:0 10px 25px rgba(0,0,0,.15)}
 .main-header h1{font-size:22px;font-weight:700}
 .main-header p{font-size:14px;opacity:.8;margin-top:5px}
@@ -23,20 +23,37 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#eef2f7;padding:20px;col
 .bg-orange{background:linear-gradient(135deg,#f97316,#ea580c)}
 .bg-red{background:linear-gradient(135deg,#ef4444,#dc2626)}
 
-/* CHART & TABLE */
+/* SECTION TITLE */
 .section-title{font-size:18px;font-weight:700;margin:25px 0 15px;border-bottom:2px solid #e2e8f0;padding-bottom:10px;color:#1e293b}
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:25px}
-.chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,.05)}
+
+/* LAYOUT GRID (TABEL BARU & DONAT) */
+.grid-2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; margin-bottom: 25px; }
+.card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,.05); border: 1px solid #e2e8f0;}
+.card h3 { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 15px; text-align: center; }
+
+/* TABEL RINCIAN BARU */
+table.tbl-rincian { width: 100%; border-collapse: collapse; text-align: center; font-size: 13px; }
+table.tbl-rincian th { background-color: #f8fafc; color: #475569; padding: 12px 8px; border-bottom: 2px solid #e2e8f0; font-weight: 700; border: 1px solid #cbd5e1;}
+table.tbl-rincian td { padding: 12px 8px; border-bottom: 1px solid #e2e8f0; color: #334155; border: 1px solid #cbd5e1;}
+table.tbl-rincian tr:nth-child(even) td { background-color: #f8fafc; }
+table.tbl-rincian tr:hover td { background-color: #eff6ff; }
+.row-total { background-color: #e2e8f0 !important; font-weight: 800; color: #0f172a; }
+.text-green { color: #16a34a; font-weight: 800; }
+
+/* CHART CONTAINER */
+.chart-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,.05); margin-bottom:25px;}
 .chart-card h3{font-size:14px;font-weight:700;margin-bottom:15px;color:#475569;text-align:center}
 .canvas-container{position:relative;height:320px}
+.canvas-container-small{position:relative;height:280px}
 
+/* TABEL MATRIKS BAWAH */
 .table-container{background:#fff;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,.05);overflow-x:auto;margin-bottom:25px;padding:15px;}
-table{width:100%;border-collapse:collapse;text-align:center;font-size:12px}
-thead th{background:#f8fafc;color:#475569;padding:12px 6px;border-bottom:2px solid #e2e8f0;font-weight:700;border:1px solid #cbd5e1;}
-tbody td{padding:10px 6px;border-bottom:1px solid #f1f5f9;color:#334155;border:1px solid #cbd5e1;}
-tr:nth-child(even) td{background:#f8fafc}
-.total-row {background:#e2e8f0 !important; font-weight:800;}
-.text-red {color:#dc2626; font-weight:bold;}
+table.tbl-matriks { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; }
+table.tbl-matriks th { background:#f8fafc; color:#475569; padding:12px 6px; border-bottom:2px solid #e2e8f0; font-weight:700; border:1px solid #cbd5e1;}
+table.tbl-matriks td { padding:10px 6px; border-bottom:1px solid #f1f5f9; color:#334155; border:1px solid #cbd5e1;}
+table.tbl-matriks tr:nth-child(even) td { background:#f8fafc; }
+.total-row-matriks { background:#e2e8f0 !important; font-weight:800;}
+.text-red { color:#dc2626; font-weight:bold;}
 
 /* HIGHLIGHT */
 .highlight-box{background:#fef2f2;border-left:5px solid #dc2626;border-radius:8px;padding:20px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
@@ -46,6 +63,8 @@ tr:nth-child(even) td{background:#f8fafc}
 .highlight-box li::before{content:'▪';position:absolute;left:0;color:#dc2626;font-weight:bold}
 .highlight-box.info{border-left-color:#3b82f6;background:#eff6ff}
 .highlight-box.info li::before{color:#3b82f6}
+.highlight-box.warning{border-left-color:#f59e0b;background:#fffbeb}
+.highlight-box.warning li::before{color:#f59e0b}
 </style>
 </head>
 <body>
@@ -59,7 +78,7 @@ tr:nth-child(even) td{background:#f8fafc}
     <div class="kpi-grid">
         <div class="kpi-card bg-blue">
             <div class="label">Total Biaya Lembur (Jan-Okt)</div>
-            <div class="value">Rp 4,47 M</div>
+            <div class="value">Rp 4,48 M</div>
             <div class="desc">Akumulasi seluruh posisi</div>
         </div>
         <div class="kpi-card bg-purple">
@@ -70,7 +89,7 @@ tr:nth-child(even) td{background:#f8fafc}
         <div class="kpi-card bg-orange">
             <div class="label">Bulan Biaya Tertinggi</div>
             <div class="value">Mei 2026</div>
-            <div class="desc">Rp 545,3 Juta</div>
+            <div class="desc">Rp 545,2 Juta (Moment Idul Adha)</div>
         </div>
         <div class="kpi-card bg-red">
             <div class="label">Total SDM Terdampak</div>
@@ -79,22 +98,53 @@ tr:nth-child(even) td{background:#f8fafc}
         </div>
     </div>
 
-    <!-- CHART GRID -->
-    <div class="chart-grid">
-        <div class="chart-card">
-            <h3>📊 Tren Biaya Lembur Bulanan (Juta Rp)</h3>
-            <div class="canvas-container"><canvas id="chartTren"></canvas></div>
+    <!-- BARIS 1: TABEL RINCIAN (KIRI) & DONAT (KANAN) -->
+    <div class="grid-2">
+        <!-- Tabel Rincian Oktober -->
+        <div class="card">
+            <h3>📋 Rincian Biaya OT Oktober 2026</h3>
+            <table class="tbl-rincian">
+                <thead>
+                    <tr>
+                        <th>Divisi</th>
+                        <th>SDM SSI</th>
+                        <th>SDM JST</th>
+                        <th>Total Biaya (Rp)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>CIT</td><td>1</td><td>120</td><td>29.641.835</td></tr>
+                    <tr><td>CR</td><td>1</td><td>1.448</td><td>414.018.103</td></tr>
+                    <tr><td>SLM</td><td>-</td><td>13</td><td>3.701.841</td></tr>
+                    <tr><td>PLM</td><td>-</td><td>11</td><td>20.551.742</td></tr>
+                    <tr><td>OPS</td><td>3</td><td>20</td><td>7.464.468</td></tr>
+                    <tr class="row-total">
+                        <td>TOTAL</td>
+                        <td>5</td>
+                        <td>1.612</td>
+                        <td class="text-green">475.377.989</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="chart-card">
+
+        <!-- Grafik Donat Posisi -->
+        <div class="card">
             <h3>🍩 Kontribusi Biaya Lembur Berdasarkan Posisi</h3>
-            <div class="canvas-container"><canvas id="chartPosisi"></canvas></div>
+            <div class="canvas-container-small"><canvas id="chartDivisi"></canvas></div>
         </div>
     </div>
 
-    <!-- TABEL REKAP -->
+    <!-- BARIS 2: TREN BULANAN -->
+    <div class="chart-card">
+        <h3>📊 Tren Biaya Lembur Bulanan (Juta Rp)</h3>
+        <div class="canvas-container" style="height: 300px;"><canvas id="chartTren"></canvas></div>
+    </div>
+
+    <!-- BARIS 3: TABEL MATRIKS FULL -->
     <div class="section-title">Detail Rekapitulasi Biaya Over-Time (Rp)</div>
     <div class="table-container">
-        <table>
+        <table class="tbl-matriks">
             <thead>
                 <tr>
                     <th rowspan="2">Bulan</th>
@@ -114,41 +164,42 @@ tr:nth-child(even) td{background:#f8fafc}
                 </tr>
             </thead>
             <tbody>
-                <!-- Data per bulan (disederhanakan untuk visualisasi) -->
-                <tr><td>Jan</td><td>24,1 Jt</td><td>30,7 Jt</td><td>132,7 Jt</td><td>67,3 Jt</td><td>89,6 Jt</td><td>16,8 Jt</td><td>17,2 Jt</td><td>12,0 Jt</td><td class="total-row">391,1 Jt</td></tr>
-                <tr><td>Feb</td><td>27,3 Jt</td><td>29,0 Jt</td><td>131,4 Jt</td><td>70,5 Jt</td><td>92,2 Jt</td><td>22,5 Jt</td><td>14,3 Jt</td><td>9,0 Jt</td><td class="total-row">397,2 Jt</td></tr>
-                <tr><td>Mar</td><td>28,8 Jt</td><td>27,1 Jt</td><td>124,5 Jt</td><td>67,8 Jt</td><td>97,2 Jt</td><td>30,0 Jt</td><td>14,5 Jt</td><td>15,5 Jt</td><td class="total-row">405,8 Jt</td></tr>
-                <tr><td>Apr</td><td>37,1 Jt</td><td>38,1 Jt</td><td>176,3 Jt</td><td>81,4 Jt</td><td>119,9 Jt</td><td>38,6 Jt</td><td>14,4 Jt</td><td>9,0 Jt</td><td class="total-row">515,2 Jt</td></tr>
-                <tr><td>Mei</td><td>39,3 Jt</td><td>40,0 Jt</td><td>176,4 Jt</td><td>89,4 Jt</td><td>131,4 Jt</td><td>34,0 Jt</td><td>15,0 Jt</td><td>19,4 Jt</td><td class="total-row">545,2 Jt</td></tr>
-                <tr><td>Jun</td><td>30,2 Jt</td><td>29,7 Jt</td><td>134,5 Jt</td><td>61,1 Jt</td><td>104,7 Jt</td><td>25,1 Jt</td><td>16,8 Jt</td><td>10,9 Jt</td><td class="total-row">415,3 Jt</td></tr>
-                <tr><td>Jul</td><td>27,9 Jt</td><td>26,3 Jt</td><td>134,3 Jt</td><td>65,8 Jt</td><td>107,1 Jt</td><td>26,3 Jt</td><td>12,8 Jt</td><td>10,2 Jt</td><td class="total-row">411,3 Jt</td></tr>
-                <tr><td>Aug</td><td>29,2 Jt</td><td>30,8 Jt</td><td>131,2 Jt</td><td>63,0 Jt</td><td>98,6 Jt</td><td>33,8 Jt</td><td>9,1 Jt</td><td>12,6 Jt</td><td class="total-row">408,7 Jt</td></tr>
-                <tr><td>Sept</td><td>41,9 Jt</td><td>35,7 Jt</td><td>169,1 Jt</td><td>80,5 Jt</td><td>123,2 Jt</td><td>39,1 Jt</td><td>15,9 Jt</td><td>9,6 Jt</td><td class="total-row">515,3 Jt</td></tr>
-                <tr><td>Okt</td><td>34,4 Jt</td><td>29,5 Jt</td><td>159,3 Jt</td><td>71,2 Jt</td><td>117,6 Jt</td><td>32,5 Jt</td><td>18,3 Jt</td><td>9,0 Jt</td><td class="total-row">472,6 Jt</td></tr>
-                <tr class="total-row text-red">
+                <tr><td>Jan</td><td>24,1 Jt</td><td>30,7 Jt</td><td>132,7 Jt</td><td>67,3 Jt</td><td>89,6 Jt</td><td>16,8 Jt</td><td>17,2 Jt</td><td>12,0 Jt</td><td class="total-row-matriks">391,1 Jt</td></tr>
+                <tr><td>Feb</td><td>27,3 Jt</td><td>29,0 Jt</td><td>131,4 Jt</td><td>70,5 Jt</td><td>92,2 Jt</td><td>22,5 Jt</td><td>14,3 Jt</td><td>9,0 Jt</td><td class="total-row-matriks">397,2 Jt</td></tr>
+                <tr><td>Mar</td><td>28,8 Jt</td><td>27,1 Jt</td><td>124,5 Jt</td><td>67,8 Jt</td><td>97,2 Jt</td><td>30,0 Jt</td><td>14,5 Jt</td><td>15,5 Jt</td><td class="total-row-matriks">405,8 Jt</td></tr>
+                <tr><td>Apr</td><td>37,1 Jt</td><td>38,1 Jt</td><td>176,3 Jt</td><td>81,4 Jt</td><td>119,9 Jt</td><td>38,6 Jt</td><td>14,4 Jt</td><td>9,0 Jt</td><td class="total-row-matriks">515,2 Jt</td></tr>
+                <tr><td>Mei</td><td>39,3 Jt</td><td>40,0 Jt</td><td>176,4 Jt</td><td>89,4 Jt</td><td>131,4 Jt</td><td>34,0 Jt</td><td>15,0 Jt</td><td>19,4 Jt</td><td class="total-row-matriks">545,2 Jt</td></tr>
+                <tr><td>Jun</td><td>30,2 Jt</td><td>29,7 Jt</td><td>134,5 Jt</td><td>61,1 Jt</td><td>104,7 Jt</td><td>25,1 Jt</td><td>16,8 Jt</td><td>10,9 Jt</td><td class="total-row-matriks">415,3 Jt</td></tr>
+                <tr><td>Jul</td><td>27,9 Jt</td><td>26,3 Jt</td><td>134,3 Jt</td><td>65,8 Jt</td><td>107,1 Jt</td><td>26,3 Jt</td><td>12,8 Jt</td><td>10,2 Jt</td><td class="total-row-matriks">411,3 Jt</td></tr>
+                <tr><td>Aug</td><td>29,2 Jt</td><td>30,8 Jt</td><td>131,2 Jt</td><td>63,0 Jt</td><td>98,6 Jt</td><td>33,8 Jt</td><td>9,1 Jt</td><td>12,6 Jt</td><td class="total-row-matriks">408,7 Jt</td></tr>
+                <tr><td>Sept</td><td>41,9 Jt</td><td>35,7 Jt</td><td>169,1 Jt</td><td>80,5 Jt</td><td>123,2 Jt</td><td>39,1 Jt</td><td>15,9 Jt</td><td>9,6 Jt</td><td class="total-row-matriks">515,3 Jt</td></tr>
+                <tr><td>Okt</td><td>34,4 Jt</td><td>29,5 Jt</td><td>159,3 Jt</td><td>71,2 Jt</td><td>117,6 Jt</td><td>32,5 Jt</td><td>18,3 Jt</td><td>9,0 Jt</td><td class="total-row-matriks">472,6 Jt</td></tr>
+                <tr class="total-row-matriks text-red">
                     <td>TOTAL</td><td>321,2 Jt</td><td>317,4 Jt</td><td>1.469,7 Jt</td><td>718,5 Jt</td><td>1.082,4 Jt</td><td>299,2 Jt</td><td>148,9 Jt</td><td>107,2 Jt</td><td>4.478,1 Jt</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- HIGHLIGHT -->
-    <div class="highlight-box">
-        <h4>⚠️ Highlight & Analisa Over-Time</h4>
+    <!-- HIGHLIGHT WARNING (MEI) -->
+    <div class="highlight-box warning">
+        <h4>⚠️ Highlight: Anomali Kenaikan OT Bulan Mei 2026</h4>
         <ul>
-            <li><b>Dominasi Biaya:</b> Posisi <b>FLM (JST)</b> dan <b>Restocker (JST)</b> menjadi penyumbang biaya lembur terbesar, mencapai lebih dari 55% dari total pengeluaran OT perusahaan (FLM: Rp 1,46 M, Restocker: Rp 1,08 M).</li>
-            <li><b>Anomali Bulan Mei:</b> Terjadi lonjakan biaya lembur yang sangat tinggi di bulan Mei (Rp 545 Juta). Ini perlu diinvestigasi, apakah karena *peak season* atau ada *project* khusus.</li>
-            <li><b>Efisiensi Q3:</b> Biaya lembur sempat menurun di bulan Juli-Agustus (kisaran Rp 408 Juta), namun kembali naik di September-Oktober. Tren ini harus dijaga agar tidak kembali membengkak di akhir tahun.</li>
-            <li><b>Ketimpangan SSI vs JST:</b> Hampir 99% beban biaya lembur dibebankan pada unit Alih Daya (JST). Hal ini wajar karena sifat pekerjaan operasional (lapangan) yang membutuhkan fleksibilitas waktu.</li>
+            <li><b>Puncak Biaya Tertinggi:</b> Bulan Mei mencatatkan biaya OT tertinggi sepanjang tahun 2026, yaitu sebesar <b>Rp 545,2 Juta</b>.</li>
+            <li><b>Faktor Pendorong:</b> Lonjakan ini sangat dipengaruhi oleh momen <b>Hari Raya Idul Adha</b>. Kebutuhan operasional untuk pengamanan uang tunai, penyesuaian jadwal <i>cash handling</i>, dan pengawalan ekstra selama periode libur panjang menyebabkan lonjakan lembur yang signifikan.</li>
         </ul>
     </div>
 
+    <!-- HIGHLIGHT INFO (OKT) -->
     <div class="highlight-box info">
-        <h4>🎯 Rekomendasi Tindak Lanjut (To Do)</h4>
+        <h4>📌 Highlight: Realisasi Pembayaran OT Oktober 2026</h4>
         <ul>
-            <li><b>Evaluasi Beban Kerja FLM & Restocker:</b> Lakukan pengukuran ulang waktu kerja (Time & Motion Study) untuk melihat apakah lembur terjadi karena kurangnya SDM atau kurang efisiennya proses kerja.</li>
-            <li><b>Kontrol OT Bulan November-Desember:</b> Mengingat tren historis sering naik di akhir tahun, batasi lembur hanya untuk kegiatan yang benar-benar krusial (non-kritis dilarang lembur).</li>
-            <li><b>Digitalisasi Pengajuan Lembur:</b> Pastikan sistem absensi/pengajuan lembur terintegrasi dengan baik untuk mencegah *fraud* atau penggelembungan jam lembur.</li>
+            <li><b>Total Beban:</b> Terjadi penyesuaian total beban OT bulan Oktober menjadi <b>Rp 475,4 Juta</b> (dari perhitungan awal Rp 472,6 Juta).</li>
+            <li><b>Realisasi 2 Tahap:</b> Pembayaran dibagi menjadi 2 tahap:
+                <br>1. <b>Tanggal 13/11/2026:</b> Sebesar <b>Rp 472,6 Juta</b>.
+                <br>2. <b>Tanggal 17/11/2026:</b> Sebesar <b>Rp 2,7 Juta</b>.
+            </li>
+            <li><b>Penyebab:</b> Direktur Sektoral (Dir. FRM) akan menjalankan perjalanan dinas luar kota. Jadwal <i>approval</i> yang seharusnya dilaksanakan tanggal 12 ditarik menjadi tanggal 09/11. Kondisi ini menyebabkan masih ada beberapa data lembur/OT pegawai yang masih berjalan dan belum terverifikasi oleh pimpinan, sehingga realisasi pembayarannya terbagi dalam 2 tahap.</li>
         </ul>
     </div>
 
@@ -156,43 +207,9 @@ tr:nth-child(even) td{background:#f8fafc}
 
 <script>
     // ---------------------------------------------------------
-    // GRAFIK 1: TREN BULANAN
+    // GRAFIK 1: KONTRIBUSI POSISI (Akumulasi Jan-Okt)
     // ---------------------------------------------------------
-    const labelsBulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sept', 'Okt'];
-    // Konversi ke Juta
-    const dataTotal = [391.2, 397.2, 405.8, 515.3, 545.3, 415.3, 411.3, 408.7, 515.4, 472.7];
-
-    new Chart(document.getElementById('chartTren').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: labelsBulan,
-            datasets: [{
-                label: 'Total Biaya OT (Juta Rp)',
-                data: dataTotal,
-                backgroundColor: '#3b82f6',
-                borderRadius: 6,
-                barThickness: 40
-            }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: { backgroundColor: '#1e293b', padding: 12, cornerRadius: 6,
-                    callbacks: { label: function(c) { return ' Rp ' + c.parsed.y.toFixed(1) + ' Juta'; } }
-                }
-            },
-            scales: {
-                y: { grid: { color: '#f1f5f9' }, ticks: { callback: function(v) { return 'Rp ' + v + ' Jt'; } } },
-                x: { grid: { display: false } }
-            }
-        }
-    });
-
-    // ---------------------------------------------------------
-    // GRAFIK 2: KONTRIBUSI POSISI
-    // ---------------------------------------------------------
-    new Chart(document.getElementById('chartPosisi').getContext('2d'), {
+    new Chart(document.getElementById('chartDivisi').getContext('2d'), {
         type: 'doughnut',
         data: {
             labels: ['FLM', 'Restocker', 'Driver', 'Cashier', 'Cash In Transit', 'Admin Staf', 'Supir', 'Staf OPS/PLM'],
@@ -205,14 +222,54 @@ tr:nth-child(even) td{background:#f8fafc}
         options: {
             responsive: true, maintainAspectRatio: false, cutout: '60%',
             plugins: {
-                legend: { position: 'right', labels: { padding: 15, usePointStyle: true, pointStyle: 'circle', font: {size: 11} } },
+                legend: { position: 'right', labels: { padding: 15, usePointStyle: true, pointStyle: 'circle', font: {size: 10} } },
                 tooltip: { backgroundColor: '#1e293b', padding: 12, cornerRadius: 6,
                     callbacks: { label: function(c) {
                         let total = c.dataset.data.reduce((a,b) => a+b, 0);
                         let pct = ((c.parsed / total) * 100).toFixed(1);
-                        return c.label + ': Rp ' + c.parsed + ' Jt (' + pct + '%)';
+                        return c.label + ': Rp ' + c.parsed.toFixed(1) + ' Jt (' + pct + '%)';
                     }}
                 }
+            }
+        }
+    });
+
+    // ---------------------------------------------------------
+    // GRAFIK 2: TREN BULANAN
+    // ---------------------------------------------------------
+    const labelsBulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sept', 'Okt'];
+    const dataTotal = [391.1, 397.2, 405.8, 515.2, 545.2, 415.3, 411.3, 408.7, 515.3, 475.4];
+
+    new Chart(document.getElementById('chartTren').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: labelsBulan,
+            datasets: [{
+                label: 'Total Biaya OT (Juta Rp)',
+                data: dataTotal,
+                backgroundColor: ['#3b82f6', '#3b82f6', '#3b82f6', '#3b82f6', '#ef4444', '#3b82f6', '#3b82f6', '#3b82f6', '#3b82f6', '#f59e0b'],
+                borderRadius: 6,
+                barThickness: 40
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { backgroundColor: '#1e293b', padding: 12, cornerRadius: 6,
+                    callbacks: { 
+                        label: function(c) { return ' Rp ' + c.parsed.y.toFixed(1) + ' Juta'; },
+                        afterLabel: function(c) {
+                            if(c.label === 'Mei') return ' (Idul Adha)';
+                            if(c.label === 'Okt') return ' (Penyesuaian Beban)';
+                            return '';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { grid: { color: '#f1f5f9' }, ticks: { callback: function(v) { return 'Rp ' + v + ' Jt'; } } },
+                x: { grid: { display: false } }
             }
         }
     });
